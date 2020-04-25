@@ -16,11 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home/index', 'HomeController@index');
 
 Route::get('/author/index', 'AuthorController@index');
+Route::get('/author/detail/{id}', 'AuthorController@detail');
 Route::post('/author/edit', 'AuthorController@edit');
 Route::post('/author/delete', 'AuthorController@delete');
 Route::post('/author/add', 'AuthorController@add');
 
 Route::get('/bookcategory/index', 'BookCategoryController@index');
+Route::get('/bookcategory/detail/{id}', 'BookCategoryController@detail');
 Route::post('/bookcategory/edit', 'BookCategoryController@edit');
 Route::post('/bookcategory/delete', 'BookCategoryController@delete');
 Route::post('/bookcategory/add', 'BookCategoryController@add');

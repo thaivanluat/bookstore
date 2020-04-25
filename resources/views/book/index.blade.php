@@ -4,7 +4,6 @@
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">  
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<link href="vendor/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/select2-4.0.13/css/select2.min.css" rel="stylesheet">
 	<link href="vendor/select2-4.0.13/css/select2-boostrap.min.css" rel="stylesheet">
@@ -33,8 +32,8 @@
 						@foreach ($data as $book)
 						<tr>
 							<th class="book-name">{{ $book->tendausach }}</th>
-                            <th class="book-category">{{ $book->tentheloai }}</th>
-                            <th class="book-author">{{ $book->tentacgia }}</th>
+                            <th class="book-category"><a href="{{url('/bookcategory/detail', [$book->matheloai])}}">{{ $book->tentheloai }}</a></th>
+                            <th class="book-author"><a href="{{url('/author/detail', [$book->matacgia])}}">{{ $book->tentacgia }}</a></th>
 							<th style="text-align: center;">
 								<input type="hidden" class="book-id" value="{{ $book->madausach }}">
 								<input type="hidden" class="author-id" value="{{ $book->matacgia }}">

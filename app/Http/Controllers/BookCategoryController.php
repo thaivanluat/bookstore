@@ -13,6 +13,18 @@ class BookCategoryController extends Controller
     	return View::make("bookcategory.index")->with(['data' => $data]);
     }
 
+    public function detail($id) {
+        $data = DB::table('DAUSACH')
+                ->join('CHITIETTACGIA', 'DAUSACH.MaDauSach', '=', 'CHITIETTACGIA.MaDauSach')
+                ->join('TACGIA', 'CHITIETTACGIA.MaTacGia', '=', 'TACGIA.MaTacGia')
+                ->select('DAUSACH.*', 'TACGIA.*')
+                ->where('DAUSACH.MaTheLoai', $id)
+                ->orderBy('DAUSACH.MaDauSach', 'desc')->get();
+        
+        $categoryName = DB::table('THELOAI')->where('MaTheLoai', $id)->value('TenTheLoai');
+    	return View::make("bookcategory.detail")->with(['data' => $data, 'name' => $categoryName]);
+    }
+
     public function edit(Request $request) {
         $input = $request->all();
 

@@ -13,9 +13,16 @@ class AuthorController extends Controller
     	return View::make("author.index")->with(['data' => $data]);
     }
 
-    public function test() {
-    	$data = DB::select('select * from TACGIA');
-    	var_dump($data);
+    public function detail($id) {
+        $data = DB::table('DAUSACH')
+                ->join('THELOAI', 'DAUSACH.MaTheLoai', '=', 'THELOAI.MaTheLoai')
+                ->join('CHITIETTACGIA', 'DAUSACH.MaDauSach', '=', 'CHITIETTACGIA.MaDauSach')
+                ->select('DAUSACH.MaDauSach','DAUSACH.TenDauSach', 'THELOAI.*')
+                ->where('CHITIETTACGIA.MaTacGia', $id)
+                ->orderBy('DAUSACH.MaDauSach', 'desc')->get();
+        
+        $authorName = DB::table('TACGIA')->where('MaTacGia', $id)->value('TenTacGia');
+    	return View::make("author.detail")->with(['data' => $data, 'name' => $authorName]);
     }
 
     public function edit(Request $request) {
