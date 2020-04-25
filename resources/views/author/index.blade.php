@@ -78,6 +78,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="exampleModalLabel">Delete author</h5>
+			<p class="heading-author-name" style="margin: auto 5px; font-size: 1.25rem; font-weight: 500;"></p>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>

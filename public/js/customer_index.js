@@ -1,26 +1,32 @@
 $(function() {
-    var authorId;
+    var customerId;
     var loading = $('#loadingModal');
     var token = $('#token').val();
 
     $('.edit-button').on('click', function() {
-    	let name = $(this).parent().siblings('.author-name').text();
-    	let year = $(this).parent().siblings('.author-birthday').text(); 
-    	authorId = $(this).siblings('.author-id').val();
-    	$('#authorName').val(name);
-    	$('#yearBirth').val(year);
+    	let name = $(this).parent().siblings('.customer-name').text();
+        let phone = $(this).parent().siblings('.customer-phone').text(); 
+        let address = $(this).parent().siblings('.customer-address').text(); 
+        let email = $(this).parent().siblings('.customer-email').text(); 
+    	customerId = $(this).siblings('.customer-id').val();
+    	$('#customerName').val(name);
+        $('#customerPhone').val(phone);
+        $('#customerAddress').val(address);
+        $('#customerEmail').val(email);
     });
 
     $('.save-change-btn').on('click', function() {
-    	let name = $('#authorName').val();
-        let year = $('#yearBirth').val();
+    	let name = $('#customerName').val();
+        let phone = $('#customerPhone').val();
+        let address = $('#customerAddress').val();
+        let email = $('#customerEmail').val();
         
         loading.modal('show');
 
         $.ajax({
            type:'POST',
-           url:'author/edit',
-           data:{id:authorId, name:name, year:year, _token: token},
+           url:'customer/edit',
+           data:{id:customerId, name:name, phone:phone, address:address, email:email,_token: token},
            success:function(data){
                 loading.modal('hide');
 
@@ -42,9 +48,9 @@ $(function() {
     });
 
     $('.delete-button').on('click', function() {
-        authorId = $(this).siblings('.author-id').val();
-        let name = $(this).parent().siblings('.author-name').text();
-        $('.heading-author-name').text(name);
+        customerId = $(this).siblings('.customer-id').val();
+        let name = $(this).parent().siblings('.customer-name').text();
+        $('.heading-customer-name').text(name);
     });
 
     $('.delete-btn').on('click', function() {
@@ -52,8 +58,8 @@ $(function() {
 
         $.ajax({
             type:'POST',
-            url:'author/delete',
-            data:{id:authorId, _token: token},
+            url:'customer/delete',
+            data:{id:customerId, _token: token},
             success:function(data){
                 loading.modal('hide');
 
@@ -75,15 +81,17 @@ $(function() {
     })
 
     $('.add-btn').on('click', function() {
-        let name = $('#addAuthorName').val();
-        let year = $('#addYearBirth').val();
+        let name = $('#addCustomerName').val();
+        let phone = $('#addCustomerPhone').val();
+        let address = $('#addCustomerAddress').val();
+        let email = $('#addCustomerEmail').val();
         
-        if(name && year) {
+        if(name && phone && address && email) {
             loading.modal('show');
             $.ajax({
                 type:'POST',
-                url:'author/add',
-                data:{name:name, year:year, _token: token},
+                url:'customer/add',
+                data:{name:name, phone:phone, address:address, email:email,_token: token},
                 success:function(data){
                     loading.modal('hide');
 

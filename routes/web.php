@@ -21,6 +21,20 @@ Route::post('/author/delete', 'AuthorController@delete');
 Route::post('/author/add', 'AuthorController@add');
 
 Route::get('/bookcategory/index', 'BookCategoryController@index');
+Route::post('/bookcategory/edit', 'BookCategoryController@edit');
+Route::post('/bookcategory/delete', 'BookCategoryController@delete');
+Route::post('/bookcategory/add', 'BookCategoryController@add');
+
+Route::get('/book/index', 'BookController@index');
+Route::post('/book/edit', 'BookController@edit');
+Route::post('/book/delete', 'BookController@delete');
+Route::post('/book/add', 'BookController@add');
+
+Route::get('/customer/index', 'CustomerController@index');
+Route::post('/customer/edit', 'CustomerController@edit');
+Route::post('/customer/delete', 'CustomerController@delete');
+Route::post('/customer/add', 'CustomerController@add');
+
 Route::get('/book/index', 'BookController@index');
 Route::get('/bookedition/index', 'BookEditionController@index');
 Route::get('/customer/index', 'CustomerController@index');

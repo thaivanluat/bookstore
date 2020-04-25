@@ -1,26 +1,40 @@
 $(function() {
+    $('#addAuthor').select2({
+        theme: "bootstrap"
+    });
+    $('#addCategory').select2({
+        theme: "bootstrap"
+    });
+
+    var bookId;
+    var categoryId;
     var authorId;
+
     var loading = $('#loadingModal');
     var token = $('#token').val();
 
     $('.edit-button').on('click', function() {
-    	let name = $(this).parent().siblings('.author-name').text();
-    	let year = $(this).parent().siblings('.author-birthday').text(); 
-    	authorId = $(this).siblings('.author-id').val();
-    	$('#authorName').val(name);
-    	$('#yearBirth').val(year);
+    	let name = $(this).parent().siblings('.book-name').text();
+        bookId = $(this).siblings('.book-id').val();
+        categoryId = $(this).siblings('.category-id').val();
+        authorId = $(this).siblings('.author-id').val();
+
+    	$('#bookName').val(name);
+        $('#bookCategory').val(categoryId);
+        $('#bookAuthor').val(authorId);
     });
 
     $('.save-change-btn').on('click', function() {
-    	let name = $('#authorName').val();
-        let year = $('#yearBirth').val();
+    	let name = $('#bookName').val();
+        let bookCategory = $('#bookCategory').val();
+        let bookAuthor = $('#bookAuthor').val();
         
         loading.modal('show');
 
         $.ajax({
            type:'POST',
-           url:'author/edit',
-           data:{id:authorId, name:name, year:year, _token: token},
+           url:'book/edit',
+           data:{id:bookId, name:name, category:bookCategory, author:bookAuthor, _token: token},
            success:function(data){
                 loading.modal('hide');
 
@@ -42,9 +56,9 @@ $(function() {
     });
 
     $('.delete-button').on('click', function() {
-        authorId = $(this).siblings('.author-id').val();
-        let name = $(this).parent().siblings('.author-name').text();
-        $('.heading-author-name').text(name);
+        bookId = $(this).siblings('.book-id').val();
+        let name = $(this).parent().siblings('.book-name').text();
+        $('.heading-book-name').text(name);
     });
 
     $('.delete-btn').on('click', function() {
@@ -52,8 +66,8 @@ $(function() {
 
         $.ajax({
             type:'POST',
-            url:'author/delete',
-            data:{id:authorId, _token: token},
+            url:'book/delete',
+            data:{id:bookId, _token: token},
             success:function(data){
                 loading.modal('hide');
 
@@ -75,15 +89,16 @@ $(function() {
     })
 
     $('.add-btn').on('click', function() {
-        let name = $('#addAuthorName').val();
-        let year = $('#addYearBirth').val();
+        let name = $('#addBookName').val();
+        let bookCategory = $('#addCategory').val();
+        let bookAuthor = $('#addAuthor').val();
         
-        if(name && year) {
+        if(name && bookCategory && bookAuthor) {
             loading.modal('show');
             $.ajax({
                 type:'POST',
-                url:'author/add',
-                data:{name:name, year:year, _token: token},
+                url:'book/add',
+                data:{name:name, category:bookCategory, author:bookAuthor, _token: token},
                 success:function(data){
                     loading.modal('hide');
 
