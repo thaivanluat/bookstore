@@ -31,7 +31,7 @@
 					<tbody>
 						@foreach ($data as $book)
 						<tr>
-							<th class="book-name">{{ $book->tendausach }}</th>
+							<th class="book-name"><a href="{{url('/book/detail', [$book->madausach])}}">{{ $book->tendausach }}</a></th>
                             <th class="book-category"><a href="{{url('/bookcategory/detail', [$book->matheloai])}}">{{ $book->tentheloai }}</a></th>
                             <th class="book-author"><a href="{{url('/author/detail', [$book->matacgia])}}">{{ $book->tentacgia }}</a></th>
 							<th style="text-align: center;">
@@ -60,7 +60,7 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-		  <div class="form-group">
+		  	<div class="form-group">
 			    <label>Name</label>
 			    <input type="text" class="form-control" id="bookName">
 			</div>

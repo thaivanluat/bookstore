@@ -22,6 +22,17 @@ class BookController extends Controller
     	return View::make("book.index")->with(['data' => $data, 'category' => $categoryOption, 'author' => $authorOption]);
     }
 
+    public function detail($id) {
+        $data = DB::table('DAUSACH')
+                ->join('SACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
+                ->select('SACH.*')
+                ->where('DAUSACH.MaDauSach', $id)
+                ->orderBy('SACH.MaSach', 'desc')->get();
+        
+        $bookName = DB::table('DAUSACH')->where('MaDauSach', $id)->value('TenDauSach');
+    	return View::make("book.detail")->with(['data' => $data, 'name' => $bookName]);
+    }
+
     public function edit(Request $request) {
         $input = $request->all();
 

@@ -28,18 +28,20 @@ Route::post('/bookcategory/delete', 'BookCategoryController@delete');
 Route::post('/bookcategory/add', 'BookCategoryController@add');
 
 Route::get('/book/index', 'BookController@index');
+Route::get('/book/detail/{id}', 'BookController@detail');
 Route::post('/book/edit', 'BookController@edit');
 Route::post('/book/delete', 'BookController@delete');
 Route::post('/book/add', 'BookController@add');
+
+Route::post('/bookedition/edit', 'BookEditionController@edit');
+Route::post('/bookedition/delete', 'BookEditionController@delete');
+Route::post('/bookedition/add', 'BookEditionController@add');
 
 Route::get('/customer/index', 'CustomerController@index');
 Route::post('/customer/edit', 'CustomerController@edit');
 Route::post('/customer/delete', 'CustomerController@delete');
 Route::post('/customer/add', 'CustomerController@add');
 
-Route::get('/book/index', 'BookController@index');
-Route::get('/bookedition/index', 'BookEditionController@index');
-Route::get('/customer/index', 'CustomerController@index');
 Route::get('/inputreceipt/index', 'InputReceiptController@index');
 Route::get('/invoice/index', 'InvoiceController@index');
 Route::get('/receipt/index', 'ReceiptController@index');

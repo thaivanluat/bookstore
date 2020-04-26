@@ -10,7 +10,6 @@
 @section('page-heading', 'Category Detail')
         
 @section('content')
-    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">{{ $name }}</h6>
@@ -27,7 +26,7 @@
 					<tbody>
 						@foreach ($data as $book)
 						<tr>
-							<th class="book-name">{{ $book->tendausach }}</th>
+							<th class="book-name"><a href="{{url('/book/detail', [$book->madausach])}}">{{ $book->tendausach }}</a></th>
                             <th class="book-author"><a href="{{url('/author/detail', [$book->matacgia])}}">{{ $book->tentacgia }}</a></th>
 						</tr>
 						@endforeach
