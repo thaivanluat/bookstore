@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Customer')
+@section('title', 'Customer List')
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">

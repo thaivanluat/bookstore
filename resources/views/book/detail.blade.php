@@ -22,20 +22,24 @@
 					<thead>
 						<tr>
 							<th>Name</th>
+							<th>Category</th>
+							<th>Author</th>
                             <th>Publishor</th>
                             <th>Publishing year</th>
-                            <th>Price</th>
+                            <th>Price (VND)</th>
 							<th>Amount</th>
-                            <th>Action</th>
+                            <th style="width: 15%;">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach ($data as $book)
 						<tr>
 							<th class="book-name">{{ $name }}</th>
+							<th class="book-category">{{ $book->tentheloai}}</th>
+							<th class="book-author">{{ $book->tentacgia }}</th>
                             <th class="book-publisher">{{ $book->nhaxuatban }}</th>
                             <th class="book-publishing-year">{{ $book->namxuatban }}</th>
-                            <th class="book-price">{{ $book->dongiaban }}</th>
+                            <th class="book-price">{{ number_format($book->dongiaban) }}</th>
                             <th class="book-amount">{{ $book->soluongton }}</th>
 							<th style="text-align: center;">
 								<input type="hidden" class="book-edition-id" value="{{ $book->masach }}">
@@ -71,6 +75,12 @@
                 <div class="form-group">
                     <label>Publishing Year</label>
                     <input type="number" min="0" class="form-control" id="bookPublishingYear">
+                </div>
+			</div>
+			<div class="form-group">
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" min="0" class="form-control" id="bookPrice">
                 </div>
 			</div>
 	      </div>
@@ -139,7 +149,11 @@
 			</div>
             <div class="form-group">
 			    <label>Publishing Year</label>
-			    <input type="number" min="0" class="form-control" id="addBookPublishingYear">
+			    <input type="number" min="0" class="form-control" id="addBookPublishingYear" placeholder="{{ now()->year }}">
+			</div>
+			<div class="form-group">
+			    <label>Price</label>
+			    <input type="number" min="0" class="form-control" id="addBookPrice" value="0">
 			</div>
 	      </div>
 	      <div class="modal-footer">
@@ -172,7 +186,7 @@
 	<script src="js/demo/datatables-demo.js"></script>
 	<script src="vendor/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
 	<script src="vendor/notify/notify.js"></script>
-	<script src="js/bookedition_index.js"></script>
+	<script src="js/book_detail.js"></script>
 @stop
 
 @section('add-button')

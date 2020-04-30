@@ -7,22 +7,25 @@ $(function() {
     $('.edit-button').on('click', function() {
         let publisherName = $(this).parent().siblings('.book-publisher').text();
         let publishingYear = $(this).parent().siblings('.book-publishing-year').text();
+        let price = $(this).parent().siblings('.book-price').text();
         bookEditionId = $(this).siblings('.book-edition-id').val();
 
         $('#bookPublisher').val(publisherName);
         $('#bookPublishingYear').val(publishingYear);
+        $('#bookPrice').val(price);
     });
 
     $('.save-change-btn').on('click', function() {
         let publisherName = $('#bookPublisher').val();
         let publishingYear = $('#bookPublishingYear').val();
-        
+        let price = $('#bookPrice').val();
+
         loading.modal('show');
 
         $.ajax({
            type:'POST',
            url:'bookedition/edit',
-           data:{id:bookEditionId, publisher:publisherName, publishing_year:publishingYear, _token: token},
+           data:{id:bookEditionId, publisher:publisherName, publishing_year:publishingYear, price:price, _token: token},
            success:function(data){
                 loading.modal('hide');
 
@@ -86,13 +89,14 @@ $(function() {
         let bookId = $('#bookId').val();
         let bookPublisher = $('#addBookPublisher').val();
         let bookPublishingYear = $('#addBookPublishingYear').val();
-        
-        if(bookPublisher && bookPublishingYear) {
+        let bookPrice = $('#addBookPrice').val();
+
+        if(bookPublisher && bookPublishingYear && bookPrice) {
             loading.modal('show');
             $.ajax({
                 type:'POST',
                 url:'bookedition/add',
-                data:{book_id:bookId, publisher:bookPublisher, publishing_year:bookPublishingYear, _token: token},
+                data:{book_id:bookId, publisher:bookPublisher, publishing_year:bookPublishingYear, price: bookPrice, _token: token},
                 success:function(data){
                     loading.modal('hide');
 

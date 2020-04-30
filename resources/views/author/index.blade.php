@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Author')
+@section('title', 'Author List')
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
 					<tbody>
 						@foreach ($data as $author)
 						<tr>
-							<th class="author-name">{{ $author->tentacgia }}</th>
+							<th class="author-name"><a href="{{url('/author/detail', [$author->matacgia])}}">{{ $author->tentacgia }}</a></th>
 							<th class="author-birthday">{{ $author->namsinh }}</th>
 							<th style="text-align: center;">
 								<input type="hidden" class="author-id" value="{{ $author->matacgia }}">

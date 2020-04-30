@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', 'HomeController@index');
 Route::get('/home/index', 'HomeController@index');
 
 Route::get('/author/index', 'AuthorController@index');
@@ -43,6 +44,12 @@ Route::post('/customer/delete', 'CustomerController@delete');
 Route::post('/customer/add', 'CustomerController@add');
 
 Route::get('/inputreceipt/index', 'InputReceiptController@index');
+Route::get('/inputreceipt/detail/{id}', 'InputReceiptController@detail');
+Route::get('/inputreceipt/add', 'InputReceiptController@addView');
+Route::get('/inputreceipt/edit/{id}', 'InputReceiptController@editView');
+Route::post('/inputreceipt/getBookEditionOptionlist', 'InputReceiptController@getBookEditionOptionList');
+Route::post('/inputreceipt/add', 'InputReceiptController@add');
+
 Route::get('/invoice/index', 'InvoiceController@index');
 Route::get('/receipt/index', 'ReceiptController@index');
 Route::get('/report/{type}', 'ReportController@index');

@@ -15,6 +15,10 @@ class BookEditionController extends Controller
         $insertId = $sequence->nextValue('S_MASACH_ID');
 
         try {
+            $validatedData = $request->validate([
+                'price' => 'required|min:0|integer|not_in:0'
+            ]);
+
             $queryResult = DB::table('SACH')->insert([
                 [
                     'MaSach' => $insertId, 
@@ -22,7 +26,7 @@ class BookEditionController extends Controller
                     'NhaXuatBan' => $input['publisher'],
                     'NamXuatBan' => $input['publishing_year'],
                     'SoLuongTon' => 0,
-                    'DonGiaBan' => 0
+                    'DonGiaBan' => $input['price']
                 ]
             ]);
         }
@@ -64,9 +68,17 @@ class BookEditionController extends Controller
         $input = $request->all();
 
         try {
+            $validatedData = $request->validate([
+                'price' => 'required|min:0|integer|not_in:0'
+            ]);
+
             $queryResult = DB::table('SACH')
                             ->where('MaSach', $input['id'])
-                            ->update(['NhaXuatBan' => $input['publisher'], 'NamXuatBan' => $input['publishing_year']]);
+                            ->update([
+                                'NhaXuatBan' => $input['publisher'], 
+                                'NamXuatBan' => $input['publishing_year'],
+                                'DonGiaBan' => $input['price']
+                                ]);
 
         }
         catch (\Exception $e) {
@@ -81,5 +93,9 @@ class BookEditionController extends Controller
         }
 
         return response()->json($response);
+    }
+
+    public function index() {
+        
     }
 }

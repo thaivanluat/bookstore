@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Book Category')
+@section('title', 'Book Category List')
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 					<tbody>
 						@foreach ($data as $category)
 						<tr>
-							<th class="category-name">{{ $category->tentheloai }}</th>
+							<th class="category-name"><a href="{{url('/bookcategory/detail', [$category->matheloai])}}">{{ $category->tentheloai }}</a></th>
 							<th style="text-align: center;">
 								<input type="hidden" class="category-id" value="{{ $category->matheloai }}">
 								<button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal">Edit</button>

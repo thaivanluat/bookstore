@@ -4,10 +4,95 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use DB;
+use Validator;
 
 class InputReceiptController extends Controller
 {
-    public function index() {
-    	return View::make("inputreceipt.index");
+    public function index()
+    {
+        $data = DB::table('PHIEUNHAPSACH')->orderBy('MaPhieuNhapSach', 'desc')->get();
+        return View::make("inputreceipt.index")->with(['data' => $data]);
+    }
+
+    public function detail($id)
+    {
+        $data = DB::table('PHIEUNHAPSACH')
+            ->join('CHITIETPHIEUNHAPSACH', 'PHIEUNHAPSACH.MaPhieuNhapSach', '=', 'CHITIETPHIEUNHAPSACH.MaPhieuNhapSach')
+            ->join('SACH', 'SACH.MaSach', '=', 'CHITIETPHIEUNHAPSACH.MaSach')
+            ->join('DAUSACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
+            ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
+            ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
+            ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+            ->select('CHITIETPHIEUNHAPSACH.*', 'SACH.NhaXuatBan', 'SACH.NamXuatBan', 'DAUSACH.TenDauSach', 'DAUSACH.MaDauSach','THELOAI.*', 'TACGIA.TenTacGia', 'TACGIA.MaTacGia')
+            ->where('PHIEUNHAPSACH.MaPhieuNhapSach', $id)
+            ->orderBy('CHITIETPHIEUNHAPSACH.MaSach', 'desc')->get();
+
+        $inputReceipt = DB::table('PHIEUNHAPSACH')->where('MaPhieuNhapSach', $id)->first();
+        return View::make("inputreceipt.detail")->with(['data' => $data, 'inputReceipt' => $inputReceipt]);
+    }
+
+    public function addView()
+    {
+        $data = DB::table('DAUSACH')->orderBy('MaDauSach', 'desc')->get();
+        return View::make("inputreceipt.add")->with(['book' => $data]);
+    }
+
+    public function editView($id)
+    {
+        return View::make("inputreceipt.edit");
+    }
+
+    public function getBookEditionOptionList(Request $request)
+    {
+        $input = $request->all();
+
+        $data = DB::table('SACH')->where('MaDauSach', $input['id'])->orderBy('MaSach', 'desc')->get();
+        return response()->json($data);
+    }
+
+    public function add(Request $request)
+    {
+        $input = $request->all();
+
+        $sequence = DB::getSequence();
+        $insertId = $sequence->nextValue('S_MAPHIEUNHAPSACH_ID');
+
+        $data = $input['data'];
+        try {
+            $queryResult = DB::transaction(function() use ($insertId, $data) {
+
+                DB::insert('insert into PHIEUNHAPSACH (MaPhieuNhapSach, NgayLap,TongTien) values (?,sysdate , ?)', [$insertId, 0]);
+
+                foreach ($data as $dt) {
+
+                    DB::table('CHITIETPHIEUNHAPSACH')->insert([
+                        [
+                            'MaPhieuNhapSach' => $insertId,
+                            'MaSach' => $dt['id'],
+                            'SoLuong' =>  $dt['quantity'],
+                            'DonGiaNhap' =>  0,
+                            'ThanhTien' => 0
+                        ]
+                    ]);
+                }
+    
+                DB::statement('call proc_update_price_CHITIETPHIEUNHAPSACH(?)',[$insertId]);
+                DB::statement('call proc_update_total_PhieuNhap(?)',[$insertId]);
+            });
+
+        } catch (\Exception $e) {
+            $queryResult = 0;
+        }
+
+        $response = [];
+        $response['success'] = true;
+        $response['id'] = $insertId;
+    
+        if($queryResult === 0) {
+            $response['success'] = false;
+        }
+
+        return response()->json($response);
     }
 }

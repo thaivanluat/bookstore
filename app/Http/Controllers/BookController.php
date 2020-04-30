@@ -25,7 +25,10 @@ class BookController extends Controller
     public function detail($id) {
         $data = DB::table('DAUSACH')
                 ->join('SACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
-                ->select('SACH.*')
+                ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
+                ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
+                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+                ->select('SACH.*', 'TACGIA.TenTacGia', 'THELOAI.TenTheLoai')
                 ->where('DAUSACH.MaDauSach', $id)
                 ->orderBy('SACH.MaSach', 'desc')->get();
         
