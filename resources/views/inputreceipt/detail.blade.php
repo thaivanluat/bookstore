@@ -5,6 +5,11 @@
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		.sum :not(:first-child) {
+			color:red;
+		}
+	</style>
 @stop
 
 @section('page-heading', 'Detail Input Receipt')
@@ -14,7 +19,7 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary" style="float:left">Input Receipt #{{ $inputReceipt->maphieunhapsach }}</h6>
-			<span style="float:right"><strong>Total:</strong> {{ number_format($inputReceipt->tongtien) }} VND</span>
+			<span class="sum" style="float:right"><strong>Total: </strong><span>{{ number_format($inputReceipt->tongtien) }} ₫</span></span>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">

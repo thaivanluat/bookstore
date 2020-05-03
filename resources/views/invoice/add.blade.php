@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Add Input Receipt')
+@section('title', 'Add Invoice')
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -13,7 +13,6 @@
 		}
 
 		.footer{
-			position: absolute;
     		bottom: 0;
 			text-align: center;
 			width: 100%;
@@ -21,18 +20,61 @@
 		}
 
 		.table {
-			margin-bottom: 4rem;
+			/* margin-bottom: 8rem; */
+		}
+
+		.customerInfo {
+			font-size: 15px;
 		}
 	</style>   
 @stop
 
-@section('page-heading', 'Add Input Receipt')
+@section('page-heading', 'Add Invoice')
         
 @section('content')
-    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-	<div style="text-align: right;padding: 10px 10%;">
-		<strong>Total:</strong> <span id="total">0</span>
-	</div>
+    
+	<div id="searchCustomer">	
+		<h5>Customer Information</h5>
+        <div class="customerInputArea" style="width: 30%;">
+			<div class="form-group">
+				<select class="form-control" id="customerSearch">
+				</select>
+			</div>           
+        </div>
+       
+        <div id="customerInfo" style="display: none;">
+            <table style="width: 30%;">
+                <tr>
+                    <th>Customer ID:</th>
+                    <td class="customer-id"></td>
+                </tr>
+                <tr>
+                    <th>Name: </th>
+                    <td class="customer-name"></td>
+                </tr>
+                <tr>
+                    <th>Phone: </th>
+                    <td class="customer-phone"></td>
+                </tr>
+				<tr>
+                    <th>Email: </th>
+                    <td class="customer-email"></td>
+                </tr>
+				<tr>
+                    <th>Address: </th>
+                    <td class="customer-address"></td>
+                </tr>
+				<tr>
+                    <th>Debt: </th>
+                    <td class="customer-debt"></td>
+                </tr>
+            </table>
+        </div>      
+    </div>
+	<hr style="border: 1px solid black;">
+	<h5>Invoice Detail</h5>
+	<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+	
     <table class="table" id="listItem">
         <thead>
             <tr>
@@ -55,13 +97,14 @@
                 <td class="book-publishing-year"></td>
                 <td><input class="form-control book-quantity" type="number" min="0" placeholder="0"></td>
                 <td class="book-price"></td>
-                <input type="hidden" class="book-price-value" value="0">
+				<input type="hidden" class="book-price-value" value="0">
                 <td class="book-total">0</td>
 				<input type="hidden" class="book-total-value" value="0">
                 <td><a class="remove-item-btn" style="color: red; cursor: pointer"><i class="fas fa-minus-circle"></i></a></td>
             </tr>
         </tbody>
     </table>
+	<hr style="border: 1px solid black;">
 
     <!-- Choose Modal -->
 	<div class="modal fade" id="chooseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -85,7 +128,7 @@
 			<div class="form-group">
 			    <label>Book Edition</label>
 			    <select class="form-control" id="addBookEdition" placeholder="Select book edition">
-					<option></option>	
+					
 				</select>
 			</div>
 	      </div>
@@ -120,7 +163,7 @@
     <script src="vendor/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
     <script src="vendor/notify/notify.js"></script>
     <script src="vendor/select2-4.0.13/js/select2.min.js"></script>
-    <script src="js/inputreceipt_add.js"></script>
+    <script src="js/invoice_add.js"></script>
 @stop
 
 @section('add-button')
@@ -131,9 +174,16 @@
 
 @section('footer')
 	<div class="footer">
+		<div style="text-align: right;padding: 10px;float: right; width: 100%;">
+			<div style="float: left; width: 85%;padding: 10px;"><strong>Amount Received: </strong></div>
+			<div style="float: right; width: 15%"><input class="form-control amount-received" style="float:right;" type="number" min="0" placeholder="0"></div>
+		</div>
+		<div style="text-align: right;padding: 10px 10%;">
+			<strong>Total:</strong> <span id="total">0</span>
+		</div>
 		<button type="button" class="btn btn-success create-button">
 			Create
 		</button>
-		<a href="{{url('/inputreceipt/index')}}" class="btn btn-light">Cancel</a>
+		<a href="{{url('/invoice/index')}}" class="btn btn-light">Cancel</a>
     </div>
 @stop

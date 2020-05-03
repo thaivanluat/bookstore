@@ -46,12 +46,23 @@ Route::post('/customer/add', 'CustomerController@add');
 Route::get('/inputreceipt/index', 'InputReceiptController@index');
 Route::get('/inputreceipt/detail/{id}', 'InputReceiptController@detail');
 Route::get('/inputreceipt/add', 'InputReceiptController@addView');
-Route::get('/inputreceipt/edit/{id}', 'InputReceiptController@editView');
+Route::get('/inputreceipt/edit/{id}', 'InputReceiptController@editView'); // ???
 Route::post('/inputreceipt/getBookEditionOptionlist', 'InputReceiptController@getBookEditionOptionList');
 Route::post('/inputreceipt/add', 'InputReceiptController@add');
+Route::post('/inputreceipt/delete', 'InputReceiptController@delete');
 
 Route::get('/invoice/index', 'InvoiceController@index');
+Route::get('/invoice/detail/{id}', 'InvoiceController@detail');
+Route::get('/invoice/add', 'InvoiceController@addView');
+Route::post('/invoice/delete', 'InvoiceController@delete');
+Route::post('/invoice/getBookEditionOptionlist', 'InvoiceController@getBookEditionOptionList');
+Route::post('/invoice/add', 'InvoiceController@add');
+Route::post('/invoice/searchCustomer', 'InvoiceController@searchCustomer');
+
 Route::get('/receipt/index', 'ReceiptController@index');
+Route::post('/receipt/delete', 'ReceiptController@delete');
+Route::post('/receipt/add', 'ReceiptController@add');
+
 Route::get('/report/{type}', 'ReportController@index');
 
 Route::get('/test', 'AuthorController@test');

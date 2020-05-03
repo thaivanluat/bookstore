@@ -9,14 +9,12 @@ use Validator;
 
 class InputReceiptController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $data = DB::table('PHIEUNHAPSACH')->orderBy('MaPhieuNhapSach', 'desc')->get();
         return View::make("inputreceipt.index")->with(['data' => $data]);
     }
 
-    public function detail($id)
-    {
+    public function detail($id) {
         $data = DB::table('PHIEUNHAPSACH')
             ->join('CHITIETPHIEUNHAPSACH', 'PHIEUNHAPSACH.MaPhieuNhapSach', '=', 'CHITIETPHIEUNHAPSACH.MaPhieuNhapSach')
             ->join('SACH', 'SACH.MaSach', '=', 'CHITIETPHIEUNHAPSACH.MaSach')
@@ -32,27 +30,43 @@ class InputReceiptController extends Controller
         return View::make("inputreceipt.detail")->with(['data' => $data, 'inputReceipt' => $inputReceipt]);
     }
 
-    public function addView()
-    {
+    public function delete(Request $request) {
+        $input = $request->all();
+
+        try {
+            $queryResult = DB::table('PHIEUNHAPSACH')->where('MaPhieuNhapSach', '=', $input['id'])->delete();
+        }
+        catch (\Exception $e) {
+            $queryResult = 0;
+        }
+
+        $response = [];
+        $response['success'] = false;
+
+        if($queryResult == 1) {
+            $response['success'] = true;
+        }
+
+        return response()->json($response);
+    }
+
+    public function addView() {
         $data = DB::table('DAUSACH')->orderBy('MaDauSach', 'desc')->get();
         return View::make("inputreceipt.add")->with(['book' => $data]);
     }
 
-    public function editView($id)
-    {
+    public function editView($id) {
         return View::make("inputreceipt.edit");
     }
 
-    public function getBookEditionOptionList(Request $request)
-    {
+    public function getBookEditionOptionList(Request $request) {
         $input = $request->all();
 
         $data = DB::table('SACH')->where('MaDauSach', $input['id'])->orderBy('MaSach', 'desc')->get();
         return response()->json($data);
     }
 
-    public function add(Request $request)
-    {
+    public function add(Request $request) {
         $input = $request->all();
 
         $sequence = DB::getSequence();

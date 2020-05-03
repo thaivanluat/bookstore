@@ -78,7 +78,7 @@ $(function() {
                 $.notify("Error", "error");
             }
         });
-    })
+    });
 
     $('.add-btn').on('click', function() {
         let name = $('#addCustomerName').val();

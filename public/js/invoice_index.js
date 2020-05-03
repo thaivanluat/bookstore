@@ -1,12 +1,12 @@
 $(function() {
-    var inputReceiptId;
+    var invoiceId;
     var loading = $('#loadingModal');
     var token = $('#token').val();
 
     $('.delete-button').on('click', function() {
-        inputReceiptId = $(this).siblings('.input-receipt-id').val();
-        let inputReceiptName = $(this).parent().siblings('.input-receipt-name').text();
-        $('.heading-input-receipt-name').text(inputReceiptName);
+        invoiceId = $(this).siblings('.invoice-id').val();
+        let invoiceName = $(this).parent().siblings('.invoice-name').text();
+        $('.heading-invoice-name').text(invoiceName);
     });
 
     $('.delete-btn').on('click', function() {
@@ -14,8 +14,8 @@ $(function() {
 
         $.ajax({
             type:'POST',
-            url:'inputreceipt/delete',
-            data:{id:inputReceiptId, _token: token},
+            url:'invoice/delete',
+            data:{id:invoiceId, _token: token},
             success:function(data){
                 loading.modal('hide');
 

@@ -83,7 +83,7 @@ $(function() {
                 $.notify("Error", "error");
             }
         });
-    })
+    });
 
     $('.add-btn').on('click', function() {
         let bookId = $('#bookId').val();
