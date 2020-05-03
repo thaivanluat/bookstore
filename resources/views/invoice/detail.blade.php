@@ -47,7 +47,8 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary" style="float:left">Invoice #{{ $invoice->mahoadon }}</h6>
-			<span class="sum" style="float:right"><strong>Total: </strong><span>{{ number_format($invoice->tongtien) }} ₫</span></span>
+			<span class="sum" style="float:right"><strong>Total: </strong><span>{{ number_format($invoice->tongtien) }} ₫</span></span><br>
+			<span class="sum" style="float:right"><strong>Amount received: </strong><span>{{ number_format($invoice->sotientra) }} ₫</span></span>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">

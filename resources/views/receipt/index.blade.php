@@ -35,8 +35,8 @@
 						<tr>
 							<th class="receipt-name">#{{ $receipt->maphieuthu }}</th>
 							<th class="receipt-date-created">{{ $receipt->ngaylap }}</th>
-                            <th class="receipt-customer-id">{{ $receipt->makhachhang }}</th>
-                            <th class="receipt-customer-name">{{ $receipt->hoten }}</th>
+                            <th class="receipt-customer-id"><a href="{{url('/customer/detail', [$receipt->makhachhang])}}">{{ $receipt->makhachhang }}</a></th>
+                            <th class="receipt-customer-name"><a href="{{url('/customer/detail', [$receipt->makhachhang])}}">{{ $receipt->hoten }}</a></th>
                             <th class="receipt-total">{{ number_format($receipt->sotienthu) }} ₫</th>
                             <th style="text-align: center;">
 								<input type="hidden" class="receipt-id" value="{{ $receipt->maphieuthu }}">

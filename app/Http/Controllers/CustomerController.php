@@ -13,6 +13,13 @@ class CustomerController extends Controller
     	return View::make("customer.index")->with(['data' => $data]);
     }
 
+    public function detail($id) {
+        $customer = DB::table('KHACHHANG')->select('*')->where('MaKhachHang', $id)->first();
+        $invoices = DB::table('HOADON')->select('*')->where('MaKhachHang', $id)->get();
+        $receipts = DB::table('PHIEUTHU')->select('*')->where('MaKhachHang', $id)->get();
+        return View::make("customer.detail")->with(['customer' => $customer, 'invoices' => $invoices, 'receipts' => $receipts]);
+    }
+
     public function edit(Request $request) {
         $input = $request->all();
 

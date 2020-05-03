@@ -35,8 +35,8 @@
 						<tr>
 							<th class="invoice-name"><a target="_blank" href="{{url('/invoice/detail', [$invoice->mahoadon])}}">#{{ $invoice->mahoadon }}</a></th>
 							<th class="invoice-date-created">{{ $invoice->ngaylap }}</th>
-                            <th class="invoice-customer-id">{{ $invoice->makhachhang }}</th>
-							<th class="invoice-customer-name">{{ $invoice->hoten }}</th>
+                            <th class="invoice-customer-id"><a href="{{url('/customer/detail', [$invoice->makhachhang])}}">{{ $invoice->makhachhang }}</a></th>
+							<th class="invoice-customer-name"><a href="{{url('/customer/detail', [$invoice->makhachhang])}}">{{ $invoice->hoten }}</a></th>
 							<th class="invoice-amount-received">{{ number_format($invoice->sotientra) }}</th>
 							<th class="invoice-debt">{{ number_format($invoice->tongtien - $invoice->sotientra) }}</th>
 							<th class="invoice-total">{{ number_format($invoice->tongtien) }}</th>

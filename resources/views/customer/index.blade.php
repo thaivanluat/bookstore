@@ -32,8 +32,8 @@
 					<tbody>
 						@foreach ($data as $customer)
 						<tr>
-							<th class="customer-id">{{ $customer->makhachhang }}</th>
-							<th class="customer-name">{{ $customer->hoten }}</th>
+							<th class="customer-id"><a href="{{url('/customer/detail', [$customer->makhachhang])}}">{{ $customer->makhachhang }}</a></th>
+							<th class="customer-name"><a href="{{url('/customer/detail', [$customer->makhachhang])}}">{{ $customer->hoten }}</a></th>
 							<th class="customer-phone">{{ $customer->dienthoai }}</th>
                             <th class="customer-address">{{ $customer->diachi }}</th>
                             <th class="customer-email">{{ $customer->email }}</th>

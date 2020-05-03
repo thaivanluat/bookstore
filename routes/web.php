@@ -42,6 +42,7 @@ Route::get('/customer/index', 'CustomerController@index');
 Route::post('/customer/edit', 'CustomerController@edit');
 Route::post('/customer/delete', 'CustomerController@delete');
 Route::post('/customer/add', 'CustomerController@add');
+Route::get('/customer/detail/{id}', 'CustomerController@detail');
 
 Route::get('/inputreceipt/index', 'InputReceiptController@index');
 Route::get('/inputreceipt/detail/{id}', 'InputReceiptController@detail');
@@ -62,6 +63,7 @@ Route::post('/invoice/searchCustomer', 'InvoiceController@searchCustomer');
 Route::get('/receipt/index', 'ReceiptController@index');
 Route::post('/receipt/delete', 'ReceiptController@delete');
 Route::post('/receipt/add', 'ReceiptController@add');
+
 
 Route::get('/report/{type}', 'ReportController@index');
 

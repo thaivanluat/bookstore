@@ -60,6 +60,14 @@ $(function() {
 
     $(document).on("click", "a.remove-item-btn" , function() {
         $(this).closest('tr').remove();
+
+        let totalCalc = 0;
+        $(".book-total-value").each(function(index) {
+            totalCalc += parseInt($(this).val());
+        });
+
+        let text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(totalCalc);
+        total.text(text);
     });
 
     $('#addBook').val([]).select2({
@@ -119,6 +127,14 @@ $(function() {
 
     $(document).on("click", ".choose-btn" , function() {
         item = $(this).closest('tr');
+
+        let totalCalc = 0;
+        $(".book-total-value").each(function(index) {
+            totalCalc += parseInt($(this).val());
+        });
+
+        let text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(totalCalc);
+        total.text(text);
     });
 
     $('.add-btn').on('click', function() {
