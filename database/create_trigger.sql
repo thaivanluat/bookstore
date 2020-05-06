@@ -48,12 +48,9 @@ for each row
 declare
 v_debt khachhang.tongno%type;
 begin
-    if :new.TongTien != :new.SoTienTra then
-        v_debt := :new.TongTien - :new.SoTienTra;
         UPDATE KHACHHANG
-        SET TongNo = TongNo + v_debt
+        SET TongNo = :new.TongTien
         WHERE MaKhachHang = :new.MaKhachHang;
-    end if;
 end;
 
 -- trg_add_ChiTietHoaDon

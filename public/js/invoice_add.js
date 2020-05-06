@@ -213,7 +213,7 @@ $(function() {
             }
         });
 
-        let totalValue = parseInt($('#total').text().replace('₫', '').replace('.', ''));
+        let totalValue = parseInt($('#total').text().replace('₫', '').replace(/\./g, ''));
 
         if(amountReceived > totalValue) {
             alert('Amount received is greater than total !');

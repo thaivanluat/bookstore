@@ -96,11 +96,11 @@ class InvoiceController extends Controller
 
                 DB::insert('insert into HOADON (MaHoaDon, NgayLap, MaKhachHang, TongTien, SoTienTra) 
                 values (?,sysdate , ?, ?, ?)', [$insertId, $input['customer_id'], 0, $input['amount']]);
-                
-                DB::insert('insert into PHIEUTHU (MaPhieuThu, MaKhachHang, NgayLap, SoTienThu) 
-                values (?,? , sysdate, ?)', [$insertReceiptId, $input['customer_id'], $input['amount']]);
-  
+
                 foreach ($data as $dt) {
+
+                    DB::insert('insert into BAOCAOTON (MaSach, NgayNhap, TonDau, TonCuoi, PhatSinh) 
+                    values (?,sysdate , ?, ?, ?)', [ $dt['id'], 0, 0, -$dt['quantity']]);
 
                     DB::table('CHITIETHOADON')->insert([
                         [
@@ -115,6 +115,12 @@ class InvoiceController extends Controller
     
                 DB::statement('call proc_update_price_CHITIETHOADON(?)',[$insertId]);
                 DB::statement('call proc_update_total_HoaDon(?)',[$insertId]);
+
+                DB::insert('insert into PHIEUTHU (MaPhieuThu, MaKhachHang, NgayLap, SoTienThu) 
+                values (?,? , sysdate, ?)', [$insertReceiptId, $input['customer_id'], $input['amount']]);
+
+                DB::insert('insert into BAOCAOCONGNO (MaKhachhang, NgayNhap, NoDau, NoCuoi, PhatSinh) 
+                values (?, sysdate, ?, ?, ?)', [$input['customer_id'], 0, 0, $input['amount']]);
             });
 
         } catch (\Exception $e) {
