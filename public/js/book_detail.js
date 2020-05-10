@@ -7,7 +7,7 @@ $(function() {
     $('.edit-button').on('click', function() {
         let publisherName = $(this).parent().siblings('.book-publisher').text();
         let publishingYear = $(this).parent().siblings('.book-publishing-year').text();
-        let price = $(this).parent().siblings('.book-price').text();
+        let price = parseInt($(this).parent().siblings('.book-price').text().replace(/\,/g, '')) ;
         bookEditionId = $(this).siblings('.book-edition-id').val();
 
         $('#bookPublisher').val(publisherName);

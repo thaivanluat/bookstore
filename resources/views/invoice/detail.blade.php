@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Detail Invoice #'. $invoice->mahoadon)
+@section('title', trans('invoice.invoice_detail').' #'. $invoice->mahoadon)
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -12,33 +12,33 @@
 	</style>
 @stop
 
-@section('page-heading', 'Detail Invoice')
+@section('page-heading', trans('invoice.invoice_detail'))
         
 @section('content')
 	<div id="customerInfo">
 		<table style="width: 50%; width: 30%; border: 1px solid black; margin: 25px 0px;">
 			<tr>
-				<th style="width: 40%;">Customer ID:</th>
+				<th style="width: 40%;">{{trans('invoice.customer_id')}}:</th>
 				<td class="customer-id">{{ $invoice->makhachhang }}</td>
 			</tr>
 			<tr>
-				<th>Name: </th>
+				<th>{{trans('invoice.customer_name')}}: </th>
 				<td class="customer-name">{{ $invoice->hoten }}</td>
 			</tr>
 			<tr>
-				<th>Phone: </th>
+				<th>{{trans('invoice.customer_phon')}}: </th>
 				<td class="customer-phone">{{ $invoice->dienthoai }}</td>
 			</tr>
 			<tr>
-				<th>Email: </th>
+				<th>{{trans('invoice.customer_email')}}: </th>
 				<td class="customer-email">{{ $invoice->email }}</td>
 			</tr>
 			<tr>
-				<th>Address: </th>
+				<th>{{trans('invoice.customer_address')}}: </th>
 				<td class="customer-address">{{ $invoice->diachi }}</td>
 			</tr>
 			<tr>
-				<th>Debt: </th>
+				<th>{{trans('invoice.customer_debt')}}: </th>
 				<td class="customer-debt">{{ $invoice->tongno }} ₫</td>
 			</tr>
 		</table>
@@ -46,24 +46,24 @@
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary" style="float:left">Invoice #{{ $invoice->mahoadon }}</h6>
-			<span class="sum" style="float:right"><strong>Total: </strong><span>{{ number_format($invoice->tongtien) }} ₫</span></span><br>
-			<span class="sum" style="float:right"><strong>Amount received: </strong><span>{{ number_format($invoice->sotientra) }} ₫</span></span>
+			<h6 class="m-0 font-weight-bold text-primary" style="float:left">{{trans('invoice.invoice')}} #{{ $invoice->mahoadon }}</h6>
+			<span class="sum" style="float:right"><strong>{{trans('invoice.total')}}: </strong><span>{{ number_format($invoice->tongtien) }} ₫</span></span><br>
+			<span class="sum" style="float:right"><strong>{{trans('invoice.amount_received')}}: </strong><span>{{ number_format($invoice->sotientra) }} ₫</span></span>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>STT</th>
-							<th>Name</th>
-							<th>Category</th>
-							<th>Author</th>
-                            <th>Publisher</th>
-                            <th>Publising Year</th>
-                            <th>Quantity</th>
-                            <th>Price (VND)</th>
-                            <th>Total</th>
+							<th>{{trans('invoice.order_number')}}</th>
+							<th>{{trans('invoice.name')}}</th>
+							<th>{{trans('invoice.category')}}</th>
+							<th>{{trans('invoice.author')}}</th>
+                            <th>{{trans('invoice.publisher')}}</th>
+                            <th>{{trans('invoice.publishing_year')}}</th>
+                            <th>{{trans('invoice.quanlity')}}</th>
+                            <th>{{trans('invoice.price')}} (VND)</th>
+                            <th>{{trans('invoice.total_price')}}</th>
 						</tr>
 					</thead>
 					<tbody>

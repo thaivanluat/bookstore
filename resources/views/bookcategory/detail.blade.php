@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
-@section('title', $name)
+@section('title', trans('bookcategory.books_under').$name)
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
 @stop
 
-@section('page-heading', 'Category Detail')
+@section('page-heading', trans('bookcategory.category_detail'))
         
 @section('content')
 	<div class="card shadow mb-4">
@@ -19,8 +19,8 @@
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>Book Name</th>
-                            <th>Author</th>
+							<th>{{ trans('bookcategory.book_name') }}</th>
+                            <th>{{ trans('bookcategory.author') }}</th>
 						</tr>
 					</thead>
 					<tbody>

@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Books written by '.$name)
+@section('title', trans('author.books_written_by').$name)
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
 @stop
 
-@section('page-heading', 'Author Detail')
+@section('page-heading', trans('author.author_detail'))
         
 @section('content')
 	<div class="card shadow mb-4">
@@ -19,8 +19,8 @@
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>Book Name</th>
-                            <th>Category</th>
+							<th>{{ trans('author.book_name') }}</th>
+                            <th>{{ trans('author.category') }}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,5 +40,5 @@
 @section('scripts')
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-        <script src="js/demo/datatables-demo.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
 @stop

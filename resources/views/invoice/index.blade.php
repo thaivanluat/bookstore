@@ -1,33 +1,33 @@
 @extends('layouts.master')
 
-@section('title', 'Invoice List')
+@section('title', trans('invoice.invoice_list'))
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
 @stop
 
-@section('page-heading', 'Invoice')
+@section('page-heading', trans('invoice.invoice'))
         
 @section('content')
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Invoice List</h6>
+			<h6 class="m-0 font-weight-bold text-primary">{{trans('invoice.invoice_list')}}</h6>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Date created</th>
-                            <th>Customer ID</th>
-                            <th>Customer Name</th>
-							<th>Amount Received</th>
-                            <th>Debt</th>
-                            <th>Total</th>
-                            <th style="width: 20%;">Action</th>
+							<th>{{trans('invoice.invoice_id')}}</th>
+							<th>{{trans('invoice.date_created')}}</th>
+                            <th>{{trans('invoice.customer_id')}}</th>
+                            <th>{{trans('invoice.customer_name')}}</th>
+							<th>{{trans('invoice.amount_received')}}</th>
+                            <th>{{trans('invoice.debt')}}</th>
+                            <th>{{trans('invoice.total')}}</th>
+                            <th style="width: 20%;">{{trans('invoice.action')}}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -42,8 +42,8 @@
 							<th class="invoice-total">{{ number_format($invoice->tongtien) }}</th>
 							<th style="text-align: center;">
 								<input type="hidden" class="invoice-id" value="{{ $invoice->mahoadon }}">
-								<a target="_blank" href="{{url('/invoice/detail', [$invoice->mahoadon])}}" class="btn btn-info detail-button"><i class="fas fa-info-circle"></i> Detail</a>
-								<button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteModal">Delete</button>
+								<a target="_blank" href="{{url('/invoice/detail', [$invoice->mahoadon])}}" class="btn btn-info detail-button"><i class="fas fa-info-circle"></i> {{trans('invoice.detail')}}</a>
+								<button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteModal">{{trans('invoice.delete')}}</button>
 							</th>
 						</tr>
 						@endforeach
@@ -58,18 +58,18 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Delete Invoice</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">{{trans('invoice.delete_invoice')}}</h5>
 			<p class="heading-invoice-name" style="margin: auto 5px; font-size: 1.25rem; font-weight: 500;"></p>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
-		  	<p>Are you sure ?</p>
+		  	<p>{{trans('invoice.are_you_sure')}}</p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-danger delete-btn">Delete</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('invoice.close')}}</button>
+	        <button type="button" class="btn btn-danger delete-btn">{{trans('invoice.delete')}}</button>
 	      </div>
 	    </div>
 	  </div>
@@ -82,7 +82,7 @@
 		<div class="modal-body text-center">
 			<div class="loader"></div>
 			<div clas="loader-txt">
-				<p>Please wait...</p>
+				<p>{{trans('invoice.please_wait')}}</p>
 				<div class="spinner-border text-primary"></div>
 			</div>
 		</div>
@@ -102,6 +102,6 @@
 
 @section('add-button')
 	<a href="{{url('/invoice/add')}}" class="btn btn-success add-button" >
-		<i class="fas fa-plus"></i> Add invoice
+		<i class="fas fa-plus"></i> {{trans('invoice.add_invoice')}}
 	</a>
 @stop

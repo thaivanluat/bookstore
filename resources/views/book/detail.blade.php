@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Detail about '.$name)
+@section('title', trans('book.detail_about').$name)
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">  
@@ -14,21 +14,21 @@
     <input type="hidden" id="bookId" value="{{ request()->route('id') }}">
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Book Edition</h6>
+			<h6 class="m-0 font-weight-bold text-primary">{{ trans('book.book_edition') }}</h6>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Category</th>
-							<th>Author</th>
-                            <th>Publishor</th>
-                            <th>Publishing year</th>
-                            <th>Price (VND)</th>
-							<th>Amount</th>
-                            <th style="width: 15%;">Action</th>
+							<th>{{ trans('book.book_edition_name') }}</th>
+							<th>{{ trans('book.category') }}</th>
+							<th>{{ trans('book.author') }}</th>
+                            <th>{{ trans('book.publisher') }}</th>
+                            <th>{{ trans('book.publishing_year') }}</th>
+                            <th>{{ trans('book.price') }} (VND)</th>
+							<th>{{ trans('book.amount') }}</th>
+                            <th style="width: 20%;">{{ trans('book.action') }}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,8 +43,8 @@
                             <th class="book-amount">{{ $book->soluongton }}</th>
 							<th style="text-align: center;">
 								<input type="hidden" class="book-edition-id" value="{{ $book->masach }}">
-								<button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal">Edit</button>
-								<button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteModal">Delete</button>
+								<button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal">{{ trans('book.edit') }}</button>
+								<button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteModal">{{ trans('book.delete') }}</button>
 							</th>
 						</tr>
 						@endforeach
@@ -59,7 +59,7 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Edit book edition</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">{{ trans('book.edit_book_edition') }}</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
@@ -67,26 +67,26 @@
 	      <div class="modal-body">
 			<div class="form-group">
                 <div class="form-group">
-                    <label>Publisher</label>
+                    <label>{{ trans('book.publisher') }}</label>
                     <input type="text" class="form-control" id="bookPublisher">
                 </div>
 			</div>
 			<div class="form-group">
                 <div class="form-group">
-                    <label>Publishing Year</label>
+                    <label>{{ trans('book.publishing_year') }}</label>
                     <input type="number" min="0" class="form-control" id="bookPublishingYear">
                 </div>
 			</div>
 			<div class="form-group">
                 <div class="form-group">
-                    <label>Price</label>
+                    <label>{{ trans('book.price') }}</label>
                     <input type="number" min="0" class="form-control" id="bookPrice">
                 </div>
 			</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary save-change-btn">Save changes</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('book.close') }}</button>
+	        <button type="button" class="btn btn-primary save-change-btn">{{ trans('book.save_changes') }}</button>
 	      </div>
 	    </div>
 	  </div>
@@ -97,7 +97,7 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Delete this book edition</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">{{ trans('book.delete_this_book_edition') }}</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
@@ -105,28 +105,28 @@
 	      <div class="modal-body">
             <table style="margin: auto; width: 60%;">
                 <tr>
-                    <td style="width: 50%"><strong>Publisher:</strong></td>
+                    <td style="width: 50%"><strong>{{ trans('book.publisher') }}:</strong></td>
                     <td class="heading-book-publisher"></td>
                 </tr>
                 <tr>
-                    <td><strong>Publishing Year:</strong></td>
+                    <td><strong>{{ trans('book.publishing_year') }}:</strong></td>
                     <td class="heading-book-publishing-year"></td>
                 </tr>
                 <tr>
-                    <td><strong>Price:</strong></td>
+                    <td><strong>{{ trans('book.price') }}:</strong></td>
                     <td class="heading-book-price"></td>
                 </tr>
                 <tr>
-                    <td><strong>Amount:</strong></td>
+                    <td><strong>{{ trans('book.amount') }}:</strong></td>
                     <td class="heading-book-amount"></td>
                 </tr>
             </table>
             <br>
-		  	<p>Are you sure ?</p>
+		  	<p>{{ trans('book.are_you_sure') }}</p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-danger delete-btn">Delete</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('book.close') }}</button>
+	        <button type="button" class="btn btn-danger delete-btn">{{ trans('book.delete') }}</button>
 	      </div>
 	    </div>
 	  </div>
@@ -137,28 +137,28 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Add book edition</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">{{ trans('book.add_book_edition') }}</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
 	        <div class="form-group">
-			    <label>Publisher</label>
+			    <label>{{ trans('book.publisher') }}</label>
 			    <input type="text" class="form-control" id="addBookPublisher">
 			</div>
             <div class="form-group">
-			    <label>Publishing Year</label>
+			    <label>{{ trans('book.publishing_year') }}</label>
 			    <input type="number" min="0" class="form-control" id="addBookPublishingYear" placeholder="{{ now()->year }}">
 			</div>
 			<div class="form-group">
-			    <label>Price</label>
+			    <label>{{ trans('book.price') }}</label>
 			    <input type="number" min="0" class="form-control" id="addBookPrice" value="0">
 			</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-success add-btn">Add</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('book.close') }}</button>
+	        <button type="button" class="btn btn-success add-btn">{{ trans('book.add') }}</button>
 	      </div>
 	    </div>
 	  </div>
@@ -171,7 +171,7 @@
 		<div class="modal-body text-center">
 			<div class="loader"></div>
 			<div clas="loader-txt">
-				<p>Please wait...</p>
+				<p>{{ trans('book.please_wait') }}</p>
 				<div class="spinner-border text-primary"></div>
 			</div>
 		</div>
@@ -191,6 +191,6 @@
 
 @section('add-button')
 	<button type="button" class="btn btn-success add-button" data-toggle="modal" data-target="#addModal">
-		<i class="fas fa-plus"></i> Add book edition
+		<i class="fas fa-plus"></i> {{ trans('book.add_book_edition') }}
 	</button>
 @stop

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Detail Customer '. $customer->hoten)
+@section('title', trans('customer.detail_about'). $customer->hoten)
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -12,47 +12,47 @@
 	</style>
 @stop
 
-@section('page-heading', 'Customer Profile')
+@section('page-heading', trans('customer.customer_profile'))
         
 @section('content')
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="home" aria-selected="true">Profile</a>
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="home" aria-selected="true">{{ trans('customer.profile') }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#invoice" role="tab" aria-controls="profile" aria-selected="false">Invoices</a>
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#invoice" role="tab" aria-controls="profile" aria-selected="false">{{ trans('customer.invoices') }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#receipt" role="tab" aria-controls="contact" aria-selected="false">Receipts</a>
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#receipt" role="tab" aria-controls="contact" aria-selected="false">{{ trans('customer.receipts') }}</a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <ul class="list-group">
-                <li class="list-group-item"><strong>Customer ID:</strong> {{ $customer->makhachhang }}</li>
-                <li class="list-group-item"><strong>Name: </strong>{{ $customer->hoten }}</li>
-                <li class="list-group-item"><strong>Phone: </strong>{{ $customer->dienthoai }}</li>
-                <li class="list-group-item"><strong>Email: </strong>{{ $customer->email }}</li>
-                <li class="list-group-item"><strong>Address: </strong>{{ $customer->diachi }}</li>
-                <li class="list-group-item"><strong>Debt: </strong>{{ number_format($customer->tongno) }} ₫</li>
+                <li class="list-group-item"><strong>{{ trans('customer.customer_id') }}:</strong> {{ $customer->makhachhang }}</li>
+                <li class="list-group-item"><strong>{{ trans('customer.customer_name') }}: </strong>{{ $customer->hoten }}</li>
+                <li class="list-group-item"><strong>{{ trans('customer.customer_phone') }}: </strong>{{ $customer->dienthoai }}</li>
+                <li class="list-group-item"><strong>{{ trans('customer.customer_email') }}: </strong>{{ $customer->email }}</li>
+                <li class="list-group-item"><strong>{{ trans('customer.customer_address') }}: </strong>{{ $customer->diachi }}</li>
+                <li class="list-group-item"><strong>{{ trans('customer.customer_debt') }}: </strong>{{ number_format($customer->tongno) }} ₫</li>
             </ul>
         </div>
 
         <div class="tab-pane fade" id="invoice" role="tabpanel" aria-labelledby="invoice-tab">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Invoice List</h6>
-                    <span>Customer {{ $customer->hoten }}</span>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ trans('customer.invoice_list') }}</h6>
+                    <span>{{ trans('customer.customer') }} {{ $customer->hoten }}</span>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Date created</th>
-                                    <th>Amount received</th>
-                                    <th>Total</th>
+                                    <th>{{ trans('customer.invoice_id') }}</th>
+                                    <th>{{ trans('customer.date_created') }}</th>
+                                    <th>{{ trans('customer.amount_received') }} (VND)</th>
+                                    <th>{{ trans('customer.total') }} (VND)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,8 +60,8 @@
                                 <tr>
                                     <th class="invoice-id"><a href="{{url('/invoice/detail', [$invoice->mahoadon])}}">#{{ $invoice->mahoadon }}</a></th>
                                     <th class="invoice-date-created">{{ $invoice->ngaylap }}</th>
-                                    <th class="invoice-amount-received">{{ $invoice->sotientra }}</th>
-                                    <th class="invoice-total">{{ $invoice->tongtien }}</th>
+                                    <th class="invoice-amount-received">{{ number_format($invoice->sotientra) }}</th>
+                                    <th class="invoice-total">{{ number_format($invoice->tongtien) }}</th>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -74,17 +74,17 @@
         <div class="tab-pane fade" id="receipt" role="tabpanel" aria-labelledby="receipt-tab">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Receipt List</h6>
-                    <span>Customer {{ $customer->hoten }}</span>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ trans('customer.receipt_list') }}</h6>
+                    <span>{{ trans('customer.customer') }} {{ $customer->hoten }}</span>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Date created</th>
-                                    <th>Receipt value</th>
+                                    <th>{{ trans('customer.receipt_id') }}</th>
+                                    <th>{{ trans('customer.date_created') }}</th>
+                                    <th>{{ trans('customer.receipt_value') }} (VND)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -92,7 +92,7 @@
                                 <tr>
                                     <th class="receipt-id">#{{ $receipt->maphieuthu }}</th>
                                     <th class="receipt-date-created">{{ $receipt->ngaylap }}</th>
-                                    <th class="receipt-amount-received">{{ $receipt->sotienthu }}</th>
+                                    <th class="receipt-amount-received">{{ number_format($receipt->sotienthu) }}</th>
                                 </tr>
                                 @endforeach
                             </tbody>

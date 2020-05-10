@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Add Invoice')
+@section('title', trans('invoice.add_invoice'))
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -29,12 +29,12 @@
 	</style>   
 @stop
 
-@section('page-heading', 'Add Invoice')
+@section('page-heading', trans('invoice.add_invoice'))
         
 @section('content')
     
 	<div id="searchCustomer">	
-		<h5>Customer Information</h5>
+		<h5>{{trans('invoice.customer_information')}}</h5>
         <div class="customerInputArea" style="width: 30%;">
 			<div class="form-group">
 				<select class="form-control" id="customerSearch">
@@ -45,45 +45,45 @@
         <div id="customerInfo" style="display: none;">
             <table style="width: 30%;">
                 <tr>
-                    <th>Customer ID:</th>
+                    <th>{{trans('invoice.customer_id')}}:</th>
                     <td class="customer-id"></td>
                 </tr>
                 <tr>
-                    <th>Name: </th>
+                    <th>{{trans('invoice.customer_name')}}: </th>
                     <td class="customer-name"></td>
                 </tr>
                 <tr>
-                    <th>Phone: </th>
+                    <th>{{trans('invoice.customer_phone')}}: </th>
                     <td class="customer-phone"></td>
                 </tr>
 				<tr>
-                    <th>Email: </th>
+                    <th>{{trans('invoice.customer_email')}}: </th>
                     <td class="customer-email"></td>
                 </tr>
 				<tr>
-                    <th>Address: </th>
+                    <th>{{trans('invoice.customer_address')}}: </th>
                     <td class="customer-address"></td>
                 </tr>
 				<tr>
-                    <th>Debt: </th>
+                    <th>{{trans('invoice.customer_debt')}}: </th>
                     <td class="customer-debt"></td>
                 </tr>
             </table>
         </div>      
     </div>
 	<hr style="border: 1px solid black;">
-	<h5>Invoice Detail</h5>
+	<h5>{{trans('invoice.detail_invoice')}}</h5>
 	<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 	
     <table class="table" id="listItem">
         <thead>
             <tr>
-                <th scope="col" style="width: 25%">Name</th>
-                <th scope="col" style="width: 15%">Publisher</th>
-                <th scope="col" style="width: 10%">Publisher Year</th>
-                <th scope="col" style="width: 10%">Quantity</th>
-                <th scope="col" style="width: 20%">Price</th>
-                <th scope="col" style="width: 15%">Total</th>
+                <th scope="col" style="width: 25%">{{trans('invoice.name')}}</th>
+                <th scope="col" style="width: 15%">{{trans('invoice.publisher')}}</th>
+                <th scope="col" style="width: 10%">{{trans('invoice.publishing_year')}}</th>
+                <th scope="col" style="width: 10%">{{trans('invoice.quanlity')}}</th>
+                <th scope="col" style="width: 20%">{{trans('invoice.price')}}</th>
+                <th scope="col" style="width: 15%">{{trans('invoice.total_price')}}</th>
                 <th scope="col" style="width: 5%"></th>
             </tr>
         </thead>
@@ -91,7 +91,7 @@
             <tr class="blank-item">
 				<input type="hidden" class="item-id">
                 <td class="book-name">
-                    <button type="button" class="btn btn-success choose-btn" data-toggle="modal" data-target="#chooseModal">Choose book</button>
+                    <button type="button" class="btn btn-success choose-btn" data-toggle="modal" data-target="#chooseModal">{{trans('invoice.choose_book')}}</button>
                 </td>
                 <td class="book-publisher"></td>
                 <td class="book-publishing-year"></td>
@@ -111,14 +111,14 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Choose book</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">{{trans('invoice.choose_book')}}</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
             <div class="form-group">
-			    <label>Book</label>
+			    <label>{{trans('invoice.book')}}</label>
 			    <select class="form-control" id="addBook">
 					@foreach ($book as $b)
 						<option value="{{ $b->madausach }}">{{ $b->tendausach }}</option>
@@ -126,15 +126,15 @@
 				</select>
 			</div>
 			<div class="form-group">
-			    <label>Book Edition</label>
+			    <label>{{trans('invoice.book_edition')}}</label>
 			    <select class="form-control" id="addBookEdition" placeholder="Select book edition">
 					
 				</select>
 			</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-success add-btn">Add</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('invoice.close')}}</button>
+	        <button type="button" class="btn btn-success add-btn">{{trans('invoice.add')}}</button>
 	      </div>
 	    </div>
 	  </div>
@@ -147,7 +147,7 @@
 		<div class="modal-body text-center">
 			<div class="loader"></div>
 			<div clas="loader-txt">
-				<p>Please wait...</p>
+				<p>{{trans('invoice.please_wait')}}</p>
 				<div class="spinner-border text-primary"></div>
 			</div>
 		</div>
@@ -168,22 +168,22 @@
 
 @section('add-button')
 	<button type="button" class="btn btn-success add-button">
-		<i class="fas fa-plus"></i> Add book
+		<i class="fas fa-plus"></i> {{trans('invoice.add_book')}}
 	</button>
 @stop
 
 @section('footer')
 	<div class="footer">
 		<div style="text-align: right;padding: 10px;float: right; width: 100%;">
-			<div style="float: left; width: 85%;padding: 10px;"><strong>Amount Received: </strong></div>
+			<div style="float: left; width: 85%;padding: 10px;"><strong>{{trans('invoice.amount_received')}}: </strong></div>
 			<div style="float: right; width: 15%"><input class="form-control amount-received" style="float:right;" type="number" min="0" placeholder="0"></div>
 		</div>
 		<div style="text-align: right;padding: 10px 10%;">
-			<strong>Total:</strong> <span id="total">0</span>
+			<strong>{{trans('invoice.total')}}:</strong> <span id="total">0</span>
 		</div>
 		<button type="button" class="btn btn-success create-button">
-			Create
+			{{trans('invoice.create')}}
 		</button>
-		<a href="{{url('/invoice/index')}}" class="btn btn-light">Cancel</a>
+		<a href="{{url('/invoice/index')}}" class="btn btn-light">{{trans('invoice.cancel')}}</a>
     </div>
 @stop

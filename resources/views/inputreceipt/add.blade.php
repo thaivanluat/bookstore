@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Add Input Receipt')
+@section('title', trans('inputreceipt.add_input_receipt'))
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -26,22 +26,22 @@
 	</style>   
 @stop
 
-@section('page-heading', 'Add Input Receipt')
+@section('page-heading', trans('inputreceipt.add_input_receipt'))
         
 @section('content')
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 	<div style="text-align: right;padding: 10px 10%;">
-		<strong>Total:</strong> <span id="total">0</span>
+		<strong>{{trans('inputreceipt.total')}}:</strong> <span id="total">0</span>
 	</div>
     <table class="table" id="listItem">
         <thead>
             <tr>
-                <th scope="col" style="width: 25%">Name</th>
-                <th scope="col" style="width: 15%">Publisher</th>
-                <th scope="col" style="width: 10%">Publisher Year</th>
-                <th scope="col" style="width: 10%">Quantity</th>
-                <th scope="col" style="width: 20%">Price</th>
-                <th scope="col" style="width: 15%">Total</th>
+                <th scope="col" style="width: 25%">{{trans('inputreceipt.name')}}</th>
+                <th scope="col" style="width: 15%">{{trans('inputreceipt.publisher')}}</th>
+                <th scope="col" style="width: 10%">{{trans('inputreceipt.publishing_year')}}</th>
+                <th scope="col" style="width: 10%">{{trans('inputreceipt.quanlity')}}</th>
+                <th scope="col" style="width: 20%">{{trans('inputreceipt.price')}}</th>
+                <th scope="col" style="width: 15%">{{trans('inputreceipt.total_price')}}</th>
                 <th scope="col" style="width: 5%"></th>
             </tr>
         </thead>
@@ -49,7 +49,7 @@
             <tr class="blank-item">
 				<input type="hidden" class="item-id">
                 <td class="book-name">
-                    <button type="button" class="btn btn-success choose-btn" data-toggle="modal" data-target="#chooseModal">Choose book</button>
+                    <button type="button" class="btn btn-success choose-btn" data-toggle="modal" data-target="#chooseModal">{{trans('inputreceipt.choose_book')}}</button>
                 </td>
                 <td class="book-publisher"></td>
                 <td class="book-publishing-year"></td>
@@ -68,14 +68,14 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Choose book</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">{{trans('inputreceipt.choose_book')}}</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
             <div class="form-group">
-			    <label>Book</label>
+			    <label>{{trans('inputreceipt.book')}}</label>
 			    <select class="form-control" id="addBook">
 					@foreach ($book as $b)
 						<option value="{{ $b->madausach }}">{{ $b->tendausach }}</option>
@@ -83,15 +83,15 @@
 				</select>
 			</div>
 			<div class="form-group">
-			    <label>Book Edition</label>
+			    <label>{{trans('inputreceipt.book_edition')}}</label>
 			    <select class="form-control" id="addBookEdition" placeholder="Select book edition">
 					<option></option>	
 				</select>
 			</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-success add-btn">Add</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('inputreceipt.close')}}</button>
+	        <button type="button" class="btn btn-success add-btn">{{trans('inputreceipt.add')}}</button>
 	      </div>
 	    </div>
 	  </div>
@@ -104,7 +104,7 @@
 		<div class="modal-body text-center">
 			<div class="loader"></div>
 			<div clas="loader-txt">
-				<p>Please wait...</p>
+				<p>{{trans('inputreceipt.please_wait')}}</p>
 				<div class="spinner-border text-primary"></div>
 			</div>
 		</div>
@@ -125,15 +125,15 @@
 
 @section('add-button')
 	<button type="button" class="btn btn-success add-button">
-		<i class="fas fa-plus"></i> Add book
+		<i class="fas fa-plus"></i> {{trans('inputreceipt.add_book')}}
 	</button>
 @stop
 
 @section('footer')
 	<div class="footer">
 		<button type="button" class="btn btn-success create-button">
-			Create
+		{{trans('inputreceipt.create')}}
 		</button>
-		<a href="{{url('/inputreceipt/index')}}" class="btn btn-light">Cancel</a>
+		<a href="{{url('/inputreceipt/index')}}" class="btn btn-light">{{trans('inputreceipt.cancel')}}</a>
     </div>
 @stop

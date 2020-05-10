@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Book List')
+@section('title', trans('book.book_list'))
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">  
@@ -9,23 +9,23 @@
 	<link href="vendor/select2-4.0.13/css/select2-boostrap.min.css" rel="stylesheet">
 @stop
 
-@section('page-heading', 'Book')
+@section('page-heading', trans('book.book'))
 
 @section('content')
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Book List</h6>
+			<h6 class="m-0 font-weight-bold text-primary">{{ trans('book.book_list') }}</h6>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>Name</th>
-                            <th>Category</th>
-                            <th>Author</th>
-							<th>Action</th>
+							<th>{{ trans('book.name') }}</th>
+                            <th>{{ trans('book.category') }}</th>
+                            <th>{{ trans('book.author') }}</th>
+							<th>{{ trans('book.action') }}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -38,8 +38,8 @@
 								<input type="hidden" class="book-id" value="{{ $book->madausach }}">
 								<input type="hidden" class="author-id" value="{{ $book->matacgia }}">
 								<input type="hidden" class="category-id" value="{{ $book->matheloai }}">
-								<button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal">Edit</button>
-								<button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteModal">Delete</button>
+								<button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal">{{ trans('book.edit') }}</button>
+								<button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteModal">{{ trans('book.delete') }}</button>
 							</th>
 						</tr>
 						@endforeach
@@ -54,18 +54,18 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Edit book</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">{{ trans('book.edit_book') }}</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
 		  	<div class="form-group">
-			    <label>Name</label>
+			    <label>{{ trans('book.name') }}</label>
 			    <input type="text" class="form-control" id="bookName">
 			</div>
 			<div class="form-group">
-			    <label>Category</label>
+			    <label>{{ trans('book.category') }}</label>
 			    <select class="form-control" id="bookCategory">
 					@foreach ($category as $c)
 						<option value="{{ $c->matheloai }}">{{ $c->tentheloai }}</option>
@@ -73,7 +73,7 @@
 				</select>
 			</div>
 			<div class="form-group">
-			    <label>Author</label>
+			    <label>{{ trans('book.author') }}</label>
 			    <select class="form-control" id="bookAuthor">
 					@foreach ($author as $a)
 						<option value="{{ $a->matacgia }}">{{ $a->tentacgia }}</option>
@@ -82,8 +82,8 @@
 			</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary save-change-btn">Save changes</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('book.close') }}</button>
+	        <button type="button" class="btn btn-primary save-change-btn">{{ trans('book.save_changes') }}</button>
 	      </div>
 	    </div>
 	  </div>
@@ -94,18 +94,18 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Delete book</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">{{ trans('book.delete_book') }}</h5>
             <p class="heading-book-name" style="margin: auto 5px; font-size: 1.25rem; font-weight: 500;"></p>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
-		  	<p>Are you sure ?</p>
+		  	<p>{{ trans('book.are_you_sure') }}</p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-danger delete-btn">Delete</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('book.close') }}</button>
+	        <button type="button" class="btn btn-danger delete-btn">{{ trans('book.delete') }}</button>
 	      </div>
 	    </div>
 	  </div>
@@ -116,18 +116,18 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Add book</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">{{ trans('book.add_book') }}</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
 	        <div class="form-group">
-			    <label>Name</label>
+			    <label>{{ trans('book.name') }}</label>
 			    <input type="text" class="form-control" id="addBookName">
 			</div>
 			<div class="form-group">
-			    <label>Category</label>
+			    <label>{{ trans('book.category') }}</label>
 			    <select class="form-control" id="addCategory">
 					@foreach ($category as $c)
 						<option value="{{ $c->matheloai }}">{{ $c->tentheloai }}</option>
@@ -135,7 +135,7 @@
 				</select>
 			</div>
 			<div class="form-group">
-			    <label>Author</label>
+			    <label>{{ trans('book.author') }}</label>
 			    <select class="form-control" id="addAuthor">
 					@foreach ($author as $a)
 						<option value="{{ $a->matacgia }}">{{ $a->tentacgia }}</option>
@@ -144,8 +144,8 @@
 			</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-success add-btn">Add</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('book.close') }}</button>
+	        <button type="button" class="btn btn-success add-btn">{{ trans('book.add') }}</button>
 	      </div>
 	    </div>
 	  </div>
@@ -158,7 +158,7 @@
 		<div class="modal-body text-center">
 			<div class="loader"></div>
 			<div clas="loader-txt">
-				<p>Please wait...</p>
+				<p>{{ trans('book.please_wait') }}</p>
 				<div class="spinner-border text-primary"></div>
 			</div>
 		</div>
@@ -179,6 +179,6 @@
 
 @section('add-button')
 	<button type="button" class="btn btn-success add-button" data-toggle="modal" data-target="#addModal">
-		<i class="fas fa-plus"></i> Add book
+		<i class="fas fa-plus"></i> {{ trans('book.add_book') }}
 	</button>
 @stop
