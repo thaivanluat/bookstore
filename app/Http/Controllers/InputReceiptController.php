@@ -79,8 +79,8 @@ class InputReceiptController extends Controller
                 DB::insert('insert into PHIEUNHAPSACH (MaPhieuNhapSach, NgayLap,TongTien) values (?,sysdate , ?)', [$insertId, 0]);
 
                 foreach ($data as $dt) {
-                    DB::insert('insert into BAOCAOTON (MaSach, NgayNhap, TonDau, TonCuoi, PhatSinh) 
-                    values (?,sysdate , ?, ?, ?)', [ $dt['id'], 0, 0, $dt['quantity']]);
+                    // DB::insert('insert into BAOCAOTON (MaSach, NgayNhap, TonDau, TonCuoi, PhatSinh) 
+                    // values (?,sysdate , ?, ?, ?)', [ $dt['id'], 0, 0, $dt['quantity']]);
 
                     DB::table('CHITIETPHIEUNHAPSACH')->insert([
                         [
