@@ -37,6 +37,7 @@ Route::post('/book/add', 'BookController@add');
 Route::post('/bookedition/edit', 'BookEditionController@edit');
 Route::post('/bookedition/delete', 'BookEditionController@delete');
 Route::post('/bookedition/add', 'BookEditionController@add');
+Route::get('/bookedition/index', 'BookEditionController@index');
 
 Route::get('/customer/index', 'CustomerController@index');
 Route::post('/customer/edit', 'CustomerController@edit');
@@ -66,5 +67,8 @@ Route::post('/receipt/add', 'ReceiptController@add');
 
 
 Route::get('/report/{type}', 'ReportController@index');
+
+Route::post('create-debt-report', 'ReportController@createDebtReport');
+Route::post('create-inventory-report', 'ReportController@createInventoryReport');
 
 Route::get('/test', 'AuthorController@test');

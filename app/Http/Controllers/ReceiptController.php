@@ -47,19 +47,23 @@ class ReceiptController extends Controller
                 'value' => 'required|min:0|integer|not_in:0'
             ]);
 
-            $queryResult = DB::insert('insert into PHIEUTHU 
-            (MaPhieuThu, MaKhachHang, NgayLap, SoTienThu) 
-            values (?, ?,sysdate , ?)', [$insertId, $input['customer_id'], $input['value']]);
+            $queryResult = DB::transaction(function() use ($insertId, $input) {
+                DB::insert('insert into PHIEUTHU 
+                (MaPhieuThu, MaKhachHang, NgayLap, SoTienThu) 
+                values (?, ?,sysdate , ?)', [$insertId, $input['customer_id'], $input['value']]);
+
+                DB::statement('call update_baocaocongno_when_create_phieuthu(?, ?)',[$input['customer_id'], $input['value']]);
+            });
         }
         catch (\Exception $e) {
             $queryResult = 0;
         }
 
         $response = [];
-        $response['success'] = false;
+        $response['success'] = true;
 
-        if($queryResult == 1) {
-            $response['success'] = true;
+        if($queryResult === 0) {
+            $response['success'] = false;
         }
 
         return response()->json($response);

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', trans('invoice.invoice_detail').' #'. $invoice->mahoadon)
+@section('title', trans('invoice.detail_invoice').' #'. $invoice->mahoadon)
 
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -12,7 +12,7 @@
 	</style>
 @stop
 
-@section('page-heading', trans('invoice.invoice_detail'))
+@section('page-heading', trans('invoice.detail_invoice'))
         
 @section('content')
 	<div id="customerInfo">
@@ -26,7 +26,7 @@
 				<td class="customer-name">{{ $invoice->hoten }}</td>
 			</tr>
 			<tr>
-				<th>{{trans('invoice.customer_phon')}}: </th>
+				<th>{{trans('invoice.customer_phone')}}: </th>
 				<td class="customer-phone">{{ $invoice->dienthoai }}</td>
 			</tr>
 			<tr>

@@ -82,6 +82,8 @@ class InputReceiptController extends Controller
                     // DB::insert('insert into BAOCAOTON (MaSach, NgayNhap, TonDau, TonCuoi, PhatSinh) 
                     // values (?,sysdate , ?, ?, ?)', [ $dt['id'], 0, 0, $dt['quantity']]);
 
+                    DB::statement('call update_baocaoton(?, ?)',[$dt['id'], $dt['quantity']]);
+
                     DB::table('CHITIETPHIEUNHAPSACH')->insert([
                         [
                             'MaPhieuNhapSach' => $insertId,

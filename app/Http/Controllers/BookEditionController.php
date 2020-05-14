@@ -96,6 +96,14 @@ class BookEditionController extends Controller
     }
 
     public function index() {
+        $data = DB::table('DAUSACH')
+                ->join('SACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
+                ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
+                ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
+                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+                ->select('SACH.*', 'TACGIA.TenTacGia', 'TACGIA.MaTacGia', 'THELOAI.*','DAUSACH.TenDauSach')
+                ->orderBy('SACH.MaSach', 'desc')->get();
         
+    	return View::make("bookedition.index")->with(['data' => $data]);
     }
 }

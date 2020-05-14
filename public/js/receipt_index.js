@@ -96,9 +96,9 @@ $(function() {
     });
 
     $('.add-btn').on('click', function() {
-        let value = $('#addReceiptValue').val();
+        let value = parseInt($('#addReceiptValue').val());
         let customerId = $('#customerSearch').select2('val');
-        let debt = $('.customer-debt').val();
+        let debt = parseInt($('.customer-debt').val());
         let valid = true;
 
         if(value > debt) {

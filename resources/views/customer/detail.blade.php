@@ -79,7 +79,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>{{ trans('customer.receipt_id') }}</th>
@@ -109,4 +109,10 @@
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
     <script src="vendor/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+
+    <script>
+        $('#dataTable2').DataTable({
+            "order": []
+        });
+    </script>
 @stop

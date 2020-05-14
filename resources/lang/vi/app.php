@@ -13,4 +13,5 @@ return [
     'debt_report' => 'Báo cáo công nợ',
     'inventory_report' => 'Báo cáo tồn',
     'dashboard' => 'Bảng điều khiển',
+    'search_book' => 'Tra cứu sách'
 ];

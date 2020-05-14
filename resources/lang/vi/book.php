@@ -18,7 +18,7 @@ return [
     'book_edition_name' => 'Tên sách',
     'author' => 'Tác giả',
     'category' => 'Thể loại',
-    'publisherr' => 'Nhà xuất bản',
+    'publisher' => 'Nhà xuất bản',
     'publishing_year' => 'Năm xuất bản',
     'price' => 'Giá tiền',
     'amount' => 'Số lượng',
