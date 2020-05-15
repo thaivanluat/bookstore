@@ -67,6 +67,7 @@
       <span>{{ trans('app.receipt') }}</span></a>
   </li>
 
+  @if(Session::get('user')->chucvu != 'staff')
   <li class="nav-item @if (Request::is('report/*')) active @endif">
     <a class="nav-link @if (!Request::is('report/*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
       <i class="fas fa-chart-pie"></i>
@@ -79,6 +80,15 @@
       </div>
     </div>
   </li>
+  @endif
+
+  @if(Session::get('user')->manguoidung == 1)
+  <li class="nav-item @if (Request::is('user/index')) active @endif">
+    <a class="nav-link" href="{{ url('/user/index') }}">
+      <i class="fas fa-fw fa-user"></i>
+      <span>{{ trans('app.user') }}</span></a>
+  </li>
+  @endif
 
 
   <!-- Divider -->

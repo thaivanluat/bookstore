@@ -1,47 +1,35 @@
 $(function() {
-    $('#addAuthor').select2({
-        theme: "bootstrap"
-    });
-    $('#addCategory').select2({
-        theme: "bootstrap"
-    });
-
-    $('#bookCategory').select2({
-        theme: "bootstrap"
-    });
-    $('#bookAuthor').select2({
-        theme: "bootstrap"
-    });
-
-    var bookId;
-    var categoryId;
-    var authorId;
-
+    var userId;
     var loading = $('#loadingModal');
     var token = $('#token').val();
+    
+    $('#userType').select2({
+        theme: "bootstrap"
+    });
+    $('#addUserType').select2({
+        theme: "bootstrap"
+    });
 
     $('.edit-button').on('click', function() {
-    	let name = $(this).parent().siblings('.book-name').text();
-        bookId = $(this).siblings('.book-id').val();
-        categoryId = $(this).siblings('.category-id').val();
-        authorId = $(this).siblings('.author-id').val();
+        userId = $(this).siblings('.user-id').val();
+        userType = $(this).siblings('.user-type').val();
 
-    	$('#bookName').val(name);
-        $('#bookCategory').val(categoryId).trigger('change');
-        $('#bookAuthor').val(authorId).trigger('change');
+        let name = $(this).parent().siblings('.username').text();
+        $('.heading-edit-user-name').text(name);
+
+        $('#userType').val(userType);
+        $('#userType').trigger('change');
     });
 
     $('.save-change-btn').on('click', function() {
-    	let name = $('#bookName').val();
-        let bookCategory = $('#bookCategory').val();
-        let bookAuthor = $('#bookAuthor').val();
+        let userType = $('#userType').val();
         
         loading.modal('show');
 
         $.ajax({
            type:'POST',
-           url:'book/edit',
-           data:{id:bookId, name:name, category:bookCategory, author:bookAuthor, _token: token},
+           url:'user/edit',
+           data:{id:userId, type:userType, _token: token},
            success:function(data){
                 loading.modal('hide');
 
@@ -63,9 +51,9 @@ $(function() {
     });
 
     $('.delete-button').on('click', function() {
-        bookId = $(this).siblings('.book-id').val();
-        let name = $(this).parent().siblings('.book-name').text();
-        $('.heading-book-name').text(name);
+        userId = $(this).siblings('.user-id').val();
+        let name = $(this).parent().siblings('.username').text();
+        $('.heading-user-name').text(name);
     });
 
     $('.delete-btn').on('click', function() {
@@ -73,8 +61,8 @@ $(function() {
 
         $.ajax({
             type:'POST',
-            url:'book/delete',
-            data:{id:bookId, _token: token},
+            url:'user/delete',
+            data:{id:userId, _token: token},
             success:function(data){
                 loading.modal('hide');
 
@@ -96,16 +84,19 @@ $(function() {
     });
 
     $('.add-btn').on('click', function() {
-        let name = $('#addBookName').val();
-        let bookCategory = $('#addCategory').val();
-        let bookAuthor = $('#addAuthor').val();
+        let username = $('#addUserName').val();
+        let phone = $('#addPhone').val();
+        let email = $('#addEmail').val();
+        let name = $('#addName').val();
+        let birthday = $('#addBirthday').val();
+        let userType = $('#addUserType').val();
         
-        if(name && bookCategory && bookAuthor) {
+        if(name && phone && email && username && userType) {
             loading.modal('show');
             $.ajax({
                 type:'POST',
-                url:'book/add',
-                data:{name:name, category:bookCategory, author:bookAuthor, _token: token},
+                url:'user/add',
+                data:{username: username, name:name, phone:phone, email:email,birthday: birthday, type: userType,_token: token},
                 success:function(data){
                     loading.modal('hide');
 

@@ -13,5 +13,13 @@ return [
     'debt_report' => 'Báo cáo công nợ',
     'inventory_report' => 'Báo cáo tồn',
     'dashboard' => 'Bảng điều khiển',
-    'search_book' => 'Tra cứu sách'
+    'search_book' => 'Tra cứu sách',
+    'user' => 'Quản lý người dùng',
+    'change_password' => 'Đổi mật khẩu',
+    'profile' => 'Thông tin người dùng',
+    'logout' => 'Đăng xuất',
+
+    'logout_modal_title' => 'Xác nhận đăng xuất',
+    'logout_confim' => 'Chọn "Đăng xuất" bên dưới nếu bạn đã sẵn sàng kết thúc phiên hiện tại của mình.',
+    'cancel' => 'Hủy',
 ];

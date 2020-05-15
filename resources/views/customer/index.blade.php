@@ -25,7 +25,7 @@
 							<th>{{ trans('customer.customer_phone') }}</th>
                             <th>{{ trans('customer.customer_address') }}</th>
                             <th>{{ trans('customer.customer_email') }}</th>
-                            <th>{{ trans('customer.debt') }}</th>
+                            <th>{{ trans('customer.customer_debt') }}</th>
 							<th>{{ trans('customer.action') }}</th>
 						</tr>
 					</thead>
