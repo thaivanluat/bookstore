@@ -25,9 +25,9 @@ ALTER TABLE NGUOIDUNG
 /
 
 INSERT INTO NGUOIDUNG
-VALUES (S_NGUOIDUNG_ID.nextval,'admin','Admin','e10adc3949ba59abbe56e057f20f883e','0915222222','a@gmail.com',sysdate,sysdate,'admin');
+VALUES (S_MANGUOIDUNG_ID.nextval,'admin','Admin','e10adc3949ba59abbe56e057f20f883e','0915222222','a@gmail.com',sysdate,sysdate,'admin');
 INSERT INTO NGUOIDUNG
-VALUES (S_NGUOIDUNG_ID.nextval,'giamdoc','Giam doc 1','e10adc3949ba59abbe56e057f20f883e','0915222222','a@gmail.com',sysdate,sysdate,'manager');
+VALUES (S_MANGUOIDUNG_ID.nextval,'giamdoc','Giam doc 1','e10adc3949ba59abbe56e057f20f883e','0915222222','a@gmail.com',sysdate,sysdate,'manager');
 
 INSERT INTO NGUOIDUNG
-VALUES (S_NGUOIDUNG_ID.nextval,'nhanvien','Nhan vien 1','e10adc3949ba59abbe56e057f20f883e','0915222222','a@gmail.com',sysdate,sysdate,'staff');
+VALUES (S_MANGUOIDUNG_ID.nextval,'nhanvien','Nhan vien 1','e10adc3949ba59abbe56e057f20f883e','0915222222','a@gmail.com',sysdate,sysdate,'staff');
