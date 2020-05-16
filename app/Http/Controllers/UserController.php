@@ -4,19 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Cookie;
 use DB;
 use Input;
 use Session;
 
 class UserController extends Controller
 {
-    public function getLogin() {
+    public function getLogin(Request $request) {
         // Redirect the user into the dashboard right away if he already logged in
         if(Session::get('user')) {
             return redirect('/');
         }
         else {
-            return View::make("user.login");
+            $data = array(
+                'username' => '',
+                'password' => '',
+                'result' => ''
+            );
+            
+            // Show remembered username and password
+            if($request->cookie('remembered_user')) {
+                $rememberedUser = unserialize($request->cookie('remembered_user')); 
+                $data['username'] = $rememberedUser['username'];
+                $data['password'] = $rememberedUser['password'];
+            }
+
+            return View::make("user.login")->with($data);
         }        
     }
 
@@ -36,7 +50,19 @@ class UserController extends Controller
         
         if($user) {
             Session::put('user', $user);
-            return redirect('/');
+
+            $remember = $request->input('remember_me');
+
+            if(!empty($remember)) {
+                // Save username and password into cookie
+                $cookie = Cookie::forever('remembered_user',serialize(['username'=>$request->input('username'), 'password'=>$request->input('password')])); 
+            }
+            // Remove the remember cookie if user does not tick on the remember checkbox
+            else {
+                $cookie = Cookie::forget('remembered_user');
+            }
+
+            return redirect('/')->withCookie($cookie);
         }
         else {
             return redirect()->back()->with('message', trans('user.wrong_username_or_password'));
@@ -57,15 +83,9 @@ class UserController extends Controller
     }
 
     public function profile() {
-        // Temporary, later we will get session user in middleware
         $user = Session::get('user');
+        return View::make("user.profile")->with(['user' =>  $user]);
 
-        if(Session::get('user')) {
-            return View::make("user.profile")->with(['user' =>  $user]);
-        }
-        else {
-            return redirect('/user/login');
-        } 
     }
 
     public function editProfile(Request $request) {
@@ -110,13 +130,7 @@ class UserController extends Controller
     }
 
     public function changePassword() {
-        // Redirect the user into the dashboard right away if he already logged in
-        if(Session::get('user')) {
-            return View::make("user.change_password");
-        }
-        else {
-            return redirect('/user/login');
-        } 
+        return View::make("user.change_password");
     }
 
     public function postChangePassword(Request $request) {

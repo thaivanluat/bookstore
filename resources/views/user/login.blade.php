@@ -48,14 +48,14 @@
                   <form class="user" action="{{ url('/user/login') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="{{trans('user.enter_username')}}" name="username">
+                      <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="{{trans('user.enter_username')}}" name="username" value="{{ $username }}">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="{{trans('user.enter_password')}}" name="password">
+                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="{{trans('user.enter_password')}}" name="password" value="{{ $password }}">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck" name="remember_me">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="remember_me" checked>
                         <label class="custom-control-label" for="customCheck">{{ trans('user.remember_me') }}</label>
                       </div>
                     </div>
