@@ -17,6 +17,7 @@ return [
     'user' => 'Quản lý người dùng',
     'change_password' => 'Đổi mật khẩu',
     'profile' => 'Thông tin người dùng',
+    'policy' => 'Thay đổi quy định',
     'logout' => 'Đăng xuất',
 
     'logout_modal_title' => 'Xác nhận đăng xuất',

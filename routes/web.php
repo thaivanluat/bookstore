@@ -92,6 +92,9 @@ Route::group(['middleware' => 'check.user'], function () {
             Route::post('/user/edit', 'UserController@edit');
             Route::post('/user/delete', 'UserController@delete');
             Route::post('/user/add', 'UserController@add');
+
+            Route::get('/policy', 'PolicyController@index');
+            Route::post('/policy', 'PolicyController@edit');
         });
     });
 });

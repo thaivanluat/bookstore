@@ -88,7 +88,14 @@
       <i class="fas fa-fw fa-user"></i>
       <span>{{ trans('app.user') }}</span></a>
   </li>
+
+  <li class="nav-item @if (Request::is('policy')) active @endif">
+    <a class="nav-link" href="{{ url('/policy') }}">
+      <i class="fas fa-fw fa-lock"></i>
+      <span>{{ trans('app.policy') }}</span></a>
+  </li>
   @endif
+  
 
 
   <!-- Divider -->
