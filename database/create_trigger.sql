@@ -79,7 +79,7 @@ end;
 
 --trg_check_debt_before_create
 --trigger check receipt can only be created when its value smaller than or equal customer debt
-create or replace trigger trg_decrease_debt_PHIEUTHU
+create or replace trigger trg_check_debt_PHIEUTHU
 before insert
 on PHIEUTHU
 for each row
