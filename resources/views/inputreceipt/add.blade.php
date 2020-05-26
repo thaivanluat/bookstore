@@ -13,8 +13,7 @@
 		}
 
 		.footer{
-			position: absolute;
-    		bottom: 0;
+			bottom: 0;
 			text-align: center;
 			width: 100%;
 			padding: 10px 0px;
@@ -36,11 +35,13 @@
     <table class="table" id="listItem">
         <thead>
             <tr>
-                <th scope="col" style="width: 25%">{{trans('inputreceipt.name')}}</th>
-                <th scope="col" style="width: 15%">{{trans('inputreceipt.publisher')}}</th>
+                <th scope="col" style="width: 20%">{{trans('inputreceipt.name')}}</th>
+				<th scope="col" style="width: 8%">{{trans('inputreceipt.category')}}</th>
+				<th scope="col" style="width: 7%">{{trans('inputreceipt.author')}}</th>
+                <th scope="col" style="width: 10%">{{trans('inputreceipt.publisher')}}</th>
                 <th scope="col" style="width: 10%">{{trans('inputreceipt.publishing_year')}}</th>
                 <th scope="col" style="width: 10%">{{trans('inputreceipt.quanlity')}}</th>
-                <th scope="col" style="width: 20%">{{trans('inputreceipt.price')}}</th>
+                <th scope="col" style="width: 15%">{{trans('inputreceipt.price')}}</th>
                 <th scope="col" style="width: 15%">{{trans('inputreceipt.total_price')}}</th>
                 <th scope="col" style="width: 5%"></th>
             </tr>
@@ -51,6 +52,8 @@
                 <td class="book-name">
                     <button type="button" class="btn btn-success choose-btn" data-toggle="modal" data-target="#chooseModal">{{trans('inputreceipt.choose_book')}}</button>
                 </td>
+				<td class="book-category"></td>
+				<td class="book-author"></td>
                 <td class="book-publisher"></td>
                 <td class="book-publishing-year"></td>
                 <td><input class="form-control book-quantity" type="number" min="0" placeholder="0"></td>
@@ -62,6 +65,12 @@
             </tr>
         </tbody>
     </table>
+	<hr style="border: 1px solid black;">
+	<div class="row" style="margin-left: 1%">
+		<button type="button" class="btn btn-success add-button">
+			<i class="fas fa-plus"></i> {{trans('invoice.add_book')}}
+		</button>
+	</div>
 
     <!-- Choose Modal -->
 	<div class="modal fade" id="chooseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

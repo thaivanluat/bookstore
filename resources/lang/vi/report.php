@@ -19,5 +19,7 @@ return [
     'total_payment' => 'Tổng tiền trả',
     'customer_name' => 'Tên khách hàng',
     'customer_phone' => 'Số điện thoại',
-    'customer_email' => 'Email'
+    'customer_email' => 'Email',
+    'required_month_year_value' => 'Vui lòng chọn ngày tháng',
+    'print_report' => 'In báo cáo'
 ];

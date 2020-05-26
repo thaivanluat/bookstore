@@ -40,6 +40,9 @@ return [
     'customer_debt' => 'Tổng nợ',
     'amount_received' => 'Số tiền trả',
     'debt' => 'Tiền nợ',
+    'change' => 'Còn lại',
+    'discount' => 'Giảm giá',
+    'final_total' => 'Thành tiền',
 
     'add_book' => 'Thêm sách',
     'create' => 'Tạo',

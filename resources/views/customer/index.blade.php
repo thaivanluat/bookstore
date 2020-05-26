@@ -25,7 +25,9 @@
 							<th>{{ trans('customer.customer_phone') }}</th>
                             <th>{{ trans('customer.customer_address') }}</th>
                             <th>{{ trans('customer.customer_email') }}</th>
+							<th>{{ trans('customer.customer_birthday') }}</th>
                             <th>{{ trans('customer.customer_debt') }}</th>
+							<th>{{ trans('customer.customer_type') }}</th>
 							<th>{{ trans('customer.action') }}</th>
 						</tr>
 					</thead>
@@ -37,8 +39,16 @@
 							<th class="customer-phone">{{ $customer->dienthoai }}</th>
                             <th class="customer-address">{{ $customer->diachi }}</th>
                             <th class="customer-email">{{ $customer->email }}</th>
-                            <th style="text-align: right;" class="customer-total-debt">{{ $customer->tongno }}</th>
-							<th style="text-align: center;">
+							<th class="customer-birthday">{{ date('d-m-Y', strtotime($customer->sinhnhat)) }}</th>
+                            <th style="text-align: right;" class="customer-total-debt">{{ number_format($customer->tongno) }}</th>
+							<th class="customer-type" style="text-align: center;">
+							@if($customer->trangthai == 'vip')
+								<span class="badge badge-warning">{{trans('customer.vip_customer')}}</span>
+							@else
+								<span class="badge badge-primary">{{trans('customer.normal_customer')}}</span>
+							@endif
+							</th>
+							<th style="text-align: center; width: 20%;">
 								<input type="hidden" class="customer-id" value="{{ $customer->makhachhang }}">
 								<button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal">{{ trans('customer.edit') }}</button>
 								<button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteModal">{{ trans('customer.delete') }}</button>
@@ -77,6 +87,10 @@
             <div class="form-group">
 			    <label>{{ trans('customer.customer_email') }}</label>
 			    <input type="email" class="form-control" id="customerEmail">
+			</div>
+			<div class="form-group">
+			    <label>{{ trans('customer.customer_birthday') }}</label>
+			    <input type="date" min="0" class="form-control" id="customerBirthday">
 			</div>
 	      </div>
 	      <div class="modal-footer">
@@ -136,6 +150,10 @@
 			    <label>{{ trans('customer.customer_email') }}</label>
 			    <input type="email" class="form-control" id="addCustomerEmail">
 			</div>
+			<div class="form-group">
+			    <label>{{ trans('customer.customer_birthday') }}</label>
+			    <input type="date" min="0" class="form-control" id="addCustomerBirthday">
+			</div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('customer.close') }}</button>
@@ -171,9 +189,15 @@
 @stop
 
 @section('add-button')
+<div>
+	<a class="btn btn-primary" href="{{ url('/customer/birthday') }}">
+		<i class="fas fa-birthday-cake"></i> {{ trans('customer.filter_customer') }}
+	</a>
 	<button type="button" class="btn btn-success add-button" data-toggle="modal" data-target="#addModal">
 		<i class="fas fa-plus"></i> {{ trans('customer.add_customer') }}
 	</button>
+</div>
+	
 @stop
 
 

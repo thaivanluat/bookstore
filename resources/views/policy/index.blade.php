@@ -155,6 +155,25 @@
                             </label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <label for="exampleInputEmail1">{{trans('policy.total_value_to_become_vip')}}</label>
+                            
+                        </div>
+                        <div class="form-group form-inline col-sm-4">
+                            <input type="number" min="0" class="form-control" name="total_value_to_become_vip"  aria-describedby="emailHelp" value="{{ $data->muc_tien_capnhat_vip }}">
+                            <span>&nbsp VND</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <label for="exampleInputEmail1">{{trans('policy.ratio_of_discount_price')}}</label>
+                        </div>
+                        <div class="form-group form-inline col-sm-3">
+                            <input type="number" min="0" class="form-control" name="ratio_of_discount_price"  aria-describedby="emailHelp" value="{{ $data->tilegiamgia }}">
+                            <span>&nbsp %</span>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-sm m-t-10">{{trans('policy.change_policy_btn')}}</button>
                 </form>
             </div>

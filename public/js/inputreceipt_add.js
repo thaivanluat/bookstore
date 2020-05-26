@@ -82,7 +82,9 @@ $(function() {
                                 publisher: data.nhaxuatban,
                                 publishing_year: data.namxuatban,
                                 price: data.dongiaban,
-                                quantity: data.soluongton
+                                quantity: data.soluongton,
+                                author: data.tentacgia,
+                                category: data.tentheloai
                             });
                         });
                     }    
@@ -131,6 +133,8 @@ $(function() {
             item.find('.item-id').val(bookEditionObj.id);
             item.find('.choose-btn').remove();
             item.find('.book-name').html(bookObj.text);
+            item.find('.book-category').html(bookEditionObj.category);
+            item.find('.book-author').html(bookEditionObj.author);
             item.find('.book-publisher').html(bookEditionObj.publisher);
             item.find('.book-publishing-year').html(bookEditionObj.publishing_year);
             item.find('.book-quantity').val(0);

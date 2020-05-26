@@ -68,13 +68,13 @@ ALTER TABLE CHITIETTACGIA
 --------------------------------------------------------
 --  Đơn giá bán > 0 (SACH)---
 --------------------------------------------------------
-  ALTER TABLE SACH 
-  ADD CONSTRAINT check_don_gia_ban CHECK (DONGIABAN > 0);
+  -- ALTER TABLE SACH 
+  -- ADD CONSTRAINT check_don_gia_ban CHECK (DONGIABAN > 0);
 --------------------------------------------------------
 --  Tổng tiền >= 0 (PHIEUNHAPSACH)---
 --------------------------------------------------------
-  ALTER TABLE PHIEUNHAPSACH 
-  ADD CONSTRAINT check_tong_tien_phieu_nhap_sach CHECK (TONGTIEN >= 0);
+  -- ALTER TABLE PHIEUNHAPSACH 
+  -- ADD CONSTRAINT check_tong_tien_phieu_nhap_sach CHECK (TONGTIEN >= 0);
 
   --RBTV SoTienThu > 0
 ALTER TABLE PHIEUTHU ADD CONSTRAINT Check_SoTienThu CHECK (SoTienThu > 0);
@@ -83,9 +83,11 @@ ALTER TABLE PHIEUTHU ADD CONSTRAINT Check_SoTienThu CHECK (SoTienThu > 0);
 ALTER TABLE CHITIETHOADON ADD CONSTRAINT Check_slg_cthd CHECK (Soluong > 0);
 
 --RBTV DonGia > 0 (CHITIETHOADON)
-ALTER TABLE CHITIETHOADON ADD CONSTRAINT Check_dongia_cthd CHECK (DonGia > 0);
 
-ALTER TABLE CHITIETPHIEUNHAPSACH ADD CONSTRAINT CHECK_DonGiaNhap CHECK (DonGiaNhap > 0);
-ALTER TABLE HOADON ADD CONSTRAINT CHECK_TongTien CHECK (TongTien >= 0);
+-- Dont need anymore
+--ALTER TABLE CHITIETHOADON ADD CONSTRAINT Check_dongia_cthd CHECK (DonGia > 0);
+
+-- ALTER TABLE CHITIETPHIEUNHAPSACH ADD CONSTRAINT CHECK_DonGiaNhap CHECK (DonGiaNhap > 0);
+-- ALTER TABLE HOADON ADD CONSTRAINT CHECK_TongTien CHECK (TongTien >= 0);
 ALTER TABLE HOADON ADD CONSTRAINT CHECK_SoTienTra CHECK (SoTienTra > 0);
 ALTER TABLE KHACHHANG ADD CONSTRAINT CHECK_TongNo CHECK (TongNo >= 0);

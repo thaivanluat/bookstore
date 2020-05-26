@@ -57,7 +57,8 @@ class InvoiceController extends Controller
 
     public function addView() {
         $data = DB::table('DAUSACH')->orderBy('MaDauSach', 'desc')->get();
-        return View::make("invoice.add")->with(['book' => $data]);
+        $discount = DB::table('THAMSO')->select('TiLeGiamGia')->first();
+        return View::make("invoice.add")->with(['book' => $data, 'discount' => $discount]);
     }
 
     public function getBookEditionOptionList(Request $request) {
@@ -119,6 +120,9 @@ class InvoiceController extends Controller
                 values (?,? , sysdate, ?)', [$insertReceiptId, $input['customer_id'], $input['amount']]);
 
                 DB::statement('call update_baocaocongno(?, ?)',[$input['customer_id'], $insertId]);
+
+                // Check vip and discount
+                DB::statement('call cap_nhat_trang_thai_kh(?)',[$input['customer_id']]);    
             });
 
         } catch (\Exception $e) {

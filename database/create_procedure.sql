@@ -17,8 +17,6 @@ begin
     where MaPhieuNhapSach = mapn;
 end;
 
-exec proc_update_total_PhieuNhap(39);
-
 -- proc_update_price_CHITIETPHIEUNHAPSACH
 -- procedure update price of each CHITIETPHIEUNHAPSACH of input receipt
 create or replace procedure proc_update_price_CHITIETPHIEUNHAPSACH (mapn PHIEUNHAPSACH.MaPhieuNhapSach%TYPE)

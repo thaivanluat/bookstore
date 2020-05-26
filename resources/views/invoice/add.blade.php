@@ -33,8 +33,18 @@
         
 @section('content')
     
-	<div id="searchCustomer">	
-		<h5>{{trans('invoice.customer_information')}}</h5>
+	<div id="searchCustomer">
+		<div class="row">
+			<div class="col-sm-8">
+				<h5>{{trans('invoice.customer_information')}}</h5>	
+			</div>
+			<div class="col-sm-4">
+				<button style="float: right;" type="button" class="btn btn-success add-customer" data-toggle="modal" data-target="#addCustomerModal">
+					<i class="fas fa-plus"></i> {{ trans('customer.add_customer') }}
+				</button>
+			</div>
+		</div>
+		
         <div class="customerInputArea" style="width: 30%;">
 			<div class="form-group">
 				<select class="form-control" id="customerSearch">
@@ -67,6 +77,10 @@
 				<tr>
                     <th>{{trans('invoice.customer_debt')}}: </th>
                     <td class="customer-debt"></td>
+                </tr>
+				<tr>
+                    <th>{{trans('customer.customer_type')}}: </th>
+                    <td class="customer-type"></td>
                 </tr>
             </table>
         </div>      
@@ -105,6 +119,11 @@
         </tbody>
     </table>
 	<hr style="border: 1px solid black;">
+	<div class="row" style="margin-left: 1%">
+		<button type="button" class="btn btn-success add-button">
+			<i class="fas fa-plus"></i> {{trans('invoice.add_book')}}
+		</button>
+	</div>
 
     <!-- Choose Modal -->
 	<div class="modal fade" id="chooseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -140,6 +159,42 @@
 	  </div>
 	</div>
 
+	<!-- Add Customer Modal -->
+	<div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">{{ trans('customer.add_customer') }}</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <div class="form-group">
+			    <label>{{ trans('customer.customer_name') }}</label>
+			    <input type="text" class="form-control" id="addCustomerName">
+			</div>
+			<div class="form-group">
+			    <label>{{ trans('customer.customer_phone') }}</label>
+			    <input type="number" min="0" class="form-control" id="addCustomerPhone">
+			</div>
+            <div class="form-group">
+			    <label>{{ trans('customer.customer_address') }}</label>
+			    <input type="text" class="form-control" id="addCustomerAddress">
+			</div>
+            <div class="form-group">
+			    <label>{{ trans('customer.customer_email') }}</label>
+			    <input type="email" class="form-control" id="addCustomerEmail">
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('customer.close') }}</button>
+	        <button type="button" class="btn btn-success add-customer-btn">{{ trans('customer.add') }}</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
     <!-- Loading Modal -->
 	<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
 	<div class="modal-dialog modal-sm" role="document">
@@ -154,6 +209,8 @@
 		</div>
 	</div>
 	</div>
+
+	
 @stop
 
 @section('scripts')
@@ -174,13 +231,54 @@
 
 @section('footer')
 	<div class="footer">
-		<div style="text-align: right;padding: 10px;float: right; width: 100%;">
-			<div style="float: left; width: 85%;padding: 10px;"><strong>{{trans('invoice.amount_received')}}: </strong></div>
-			<div style="float: right; width: 15%"><input class="form-control amount-received" style="float:right;" type="number" min="0" placeholder="0"></div>
+		<div class="row">
+			<div class="col-sm-9" style="text-align: right">
+				<strong>{{trans('invoice.total')}}:</strong> 
+			</div>
+			<div class="col-sm-3" style="text-align: left">
+				<span id="total">0</span>
+			</div>
 		</div>
-		<div style="text-align: right;padding: 10px 10%;">
-			<strong>{{trans('invoice.total')}}:</strong> <span id="total">0</span>
+		<br>
+		<div class="discount-area" style="display: none">
+			<div class="row">
+				<div class="col-sm-9" style="text-align: right">
+					<strong>{{ trans('invoice.discount') }}:</strong> 
+				</div>
+				<div class="col-sm-3" style="text-align: left">
+					<span id="discount">{{ $discount->tilegiamgia }}</span> %
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-9" style="text-align: right">
+					<strong>{{trans('invoice.final_total')}}:</strong> 
+				</div>
+				<div class="col-sm-3" style="text-align: left">
+					<span id="finalTotal">0</span>
+				</div>
+			</div>
 		</div>
+		<br>
+		<div class="row">
+			<div class="col-sm-9" style="text-align: right">
+				<strong>{{trans('invoice.amount_received')}}: </strong>
+			</div>
+			<div class="col-sm-3 form-inline" style="text-align: left">
+				<input class="col-sm-8 form-control amount-received" type="number" min="0" placeholder="0">
+				<span>&nbsp ₫</span>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-sm-9" style="text-align: right">
+				<strong>{{trans('invoice.change')}}:</strong> 
+			</div>
+			<div class="col-sm-3" style="text-align: left">
+				<span id="change">0</span>
+			</div>
+		</div>
+		
 		<button type="button" class="btn btn-success create-button">
 			{{trans('invoice.create')}}
 		</button>

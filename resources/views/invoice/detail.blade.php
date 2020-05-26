@@ -5,11 +5,6 @@
 @section('styles')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-		.sum :not(:first-child) {
-			color:red;
-		}
-	</style>
 @stop
 
 @section('page-heading', trans('invoice.detail_invoice'))
@@ -47,8 +42,6 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary" style="float:left">{{trans('invoice.invoice')}} #{{ $invoice->mahoadon }}</h6>
-			<span class="sum" style="float:right"><strong>{{trans('invoice.total')}}: </strong><span>{{ number_format($invoice->tongtien) }} ₫</span></span><br>
-			<span class="sum" style="float:right"><strong>{{trans('invoice.amount_received')}}: </strong><span>{{ number_format($invoice->sotientra) }} ₫</span></span>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -92,4 +85,60 @@
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
     <script src="vendor/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+	<script src="js/invoice_detail.js"></script>
+@stop
+
+@section('footer')
+	<div class="footer">
+		<div class="row">
+			<div class="col-sm-9" style="text-align: right">
+				<strong>{{trans('invoice.total')}}:</strong> 
+			</div>
+			<div class="col-sm-3" style="text-align: left">
+				<span id="total"></span>
+			</div>
+		</div>
+		<br>
+		<div class="discount-area" style="display: none">
+			<div class="row">
+				<div class="col-sm-9" style="text-align: right">
+					<strong>{{ trans('invoice.discount') }}:</strong> 
+				</div>
+				<div class="col-sm-3" style="text-align: left">
+					<span id="discount"></span> %
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-9" style="text-align: right">
+					<strong>{{trans('invoice.final_total')}}:</strong> 
+				</div>
+				<div class="col-sm-3" style="text-align: left">
+					<span id="finalTotal">{{ number_format($invoice->tongtien) }}</span>
+					<span>&nbsp ₫</span>
+				</div>
+			</div>
+			<br>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-9" style="text-align: right">
+				<strong>{{trans('invoice.amount_received')}}: </strong>
+			</div>
+			<div class="col-sm-3 form-inline" style="text-align: left">
+				<span id="amountReceived">{{ number_format($invoice->sotientra) }}</span>
+				<span>&nbsp ₫</span>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-sm-9" style="text-align: right">
+				<strong>{{trans('invoice.change')}}:</strong> 
+			</div>
+			<div class="col-sm-3" style="text-align: left">
+				<span id="change">{{ number_format($invoice->tongtien - $invoice->sotientra) }}</span>
+				<span>&nbsp ₫</span>
+			</div>
+		</div>
+    </div>
 @stop

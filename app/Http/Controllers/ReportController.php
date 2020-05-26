@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use DB;
 use Input;
+use PDF;
 
 class ReportController extends Controller
 {
@@ -24,7 +25,6 @@ class ReportController extends Controller
 		$year = substr($input['date'], 0,4);
 		$month = substr($input['date'], -2);	
 
-
 		$data = DB::table('BAOCAOTON')
 				->join('SACH', 'SACH.MaSach', '=', 'BAOCAOTON.MaSach')
 				->join('DAUSACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
@@ -34,7 +34,14 @@ class ReportController extends Controller
 				])			
                 ->orderBy('BAOCAOTON.MaSach', 'asc')->get();
 
-		return redirect()->back()->with(['data'=> $data, 'month' => $month, 'year' => $year])->withInput();
+		if(!empty($input['print'])) {
+			$pdf = PDF::loadView('report.inventory_print', ['data'=> $data, 'month' => $month, 'year' => $year]);
+			return $pdf->download('report.pdf');
+			// return view::make('report.inventory_print')->with(['data'=> $data, 'month' => $month, 'year' => $year]);
+		}
+		else {
+			return redirect()->back()->with(['data'=> $data, 'month' => $month, 'year' => $year])->withInput();
+		}
 	}
 
 	public function createDebtReport(Request $request) {
@@ -51,7 +58,13 @@ class ReportController extends Controller
 					['nam', '=', $year],
 				])			
                 ->orderBy('KHACHHANG.MaKhachHang', 'asc')->get();
-
-				return redirect()->back()->with(['data'=> $data, 'month' => $month, 'year' => $year])->withInput();
+		
+		if(!empty($input['print'])) {
+			$pdf = PDF::loadView('report.debt_print', ['data'=> $data, 'month' => $month, 'year' => $year]);
+			return $pdf->download('report.pdf');
+		}
+		else {
+			return redirect()->back()->with(['data'=> $data, 'month' => $month, 'year' => $year])->withInput();
+		}
 	}
 }

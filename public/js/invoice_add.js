@@ -4,6 +4,9 @@ $(function() {
     var total = $('#total');
     var emptyItem = $('.blank-item')[0].outerHTML;
     var item = $('tr.blank-item');
+    var discount = parseInt($('#discount').text());
+    var finalTotal = $('#finalTotal');
+    var isVip = false;
 
     var bookId;
     var bookEditionId;
@@ -25,12 +28,23 @@ $(function() {
 
     // Render customer options template
     function renderCustomerOption(state) {
+        let type;
+        let style;
+        if(state.type == 'vip') {
+            type = "VIP";
+            style="warning";
+        }
+        else if(state.type == 'normal') {
+            type = "Normal";
+            style="primary";
+        }
         let optionHTML = $('<div><small>Customer ID:  </small> <span class="badge badge-primary">'+state.id+'</span></div>'+
                             '<div><small>Customer Name:  </small> <span class="badge badge-info">'+state.name+'</span></div>'+
                             '<div><small>Phone:  </small> <span class="badge badge-info">'+state.phone+'</span></div>'+
                             '<div><small>Email:  </small> <span class="badge badge-info">'+state.email+' </span></div>'+
                             '<div><small>Address:  </small> <span class="badge badge-info">'+state.address+' </span></div>'+
-                            '<div><small>Debt:  </small> <span class="badge badge-danger">'+state.debt+' VND</span></div>');
+                            '<div><small>Debt:  </small> <span class="badge badge-danger">'+state.debt+' VND</span></div>'+
+                            '<div><small>Type:  </small> <span class="badge badge-'+style+'">'+type+' </span></div>');
         if(state.name) {
             return optionHTML;
         }
@@ -53,6 +67,30 @@ $(function() {
         });
     }
 
+    function changeChangeWhenCustomerChange(isVip) {
+        let amountReceived = $('.amount-received').val();
+        let totalValue;
+        let text;
+
+        if(isVip) {
+            totalValue = parseInt($('#finalTotal').text().replace(/\D/g,''));
+        }
+        else {
+            totalValue = parseInt($('#total').text().replace(/\D/g,''));
+        }
+        
+        if(amountReceived > 0 && totalValue >= amountReceived) {
+            let change = totalValue - amountReceived;
+
+            text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(change);   
+        }
+        else {
+            text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(0); 
+        }
+
+        $('#change').text(text);
+    }
+
     $('.add-button').on('click', function() {
         let item = emptyItem;
         $('#listItem tbody').append(item);
@@ -68,6 +106,12 @@ $(function() {
 
         let text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(totalCalc);
         total.text(text);
+
+        text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(totalCalc-((totalCalc*discount)/100));
+        finalTotal.text(text);
+
+        $('.amount-received').val(0);
+        $('#change').text(0);
     });
 
     $('#addBook').val([]).select2({
@@ -135,6 +179,9 @@ $(function() {
 
         let text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(totalCalc);
         total.text(text);
+
+        text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(totalCalc-((totalCalc*discount)/100));
+        finalTotal.text(text);
     });
 
     $('.add-btn').on('click', function() {
@@ -198,6 +245,9 @@ $(function() {
 
         let text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(totalCalc);
         total.text(text);
+
+        text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(totalCalc-((totalCalc*discount)/100));
+        finalTotal.text(text);
     });
 
     $('.create-button').on('click', function() {
@@ -213,7 +263,13 @@ $(function() {
             }
         });
 
-        let totalValue = parseInt($('#total').text().replace('₫', '').replace(/\./g, ''));
+        let totalValue;
+        if(isVip) {
+            totalValue = parseInt($('#finalTotal').text().replace('₫', '').replace(/\./g, ''));  
+        }
+        else {
+            totalValue = parseInt($('#total').text().replace('₫', '').replace(/\./g, ''));
+        }
 
         if(amountReceived > totalValue) {
             alert('Amount received is greater than total !');
@@ -283,7 +339,8 @@ $(function() {
                         phone : data.dienthoai,
                         email: data.email,
                         address: data.diachi,
-                        debt: data.tongno
+                        debt: data.tongno,
+                        type: data.trangthai
                     });
                 });   
                 return {results: myResults};
@@ -298,12 +355,88 @@ $(function() {
         let customerObj = $(this).select2("data")[0];
 
         $('#customerInfo').show();
+
+        let html;
+
+        if(customerObj.type == 'vip') {
+            html ="<span class='badge badge-warning'>VIP</span>";
+            $('.discount-area').show();
+            isVip = true;
+        }
+        else {
+            html= "<span class='badge badge-primary'>Thường</span>";
+            $('.discount-area').hide();
+            isVip = false;
+        }
+
+        changeChangeWhenCustomerChange(isVip);
         
         $('.customer-id').html(customerObj.id);
         $('.customer-name').html(customerObj.name);
         $('.customer-phone').html(customerObj.phone);
         $('.customer-email').html(customerObj.email);
         $('.customer-address').html(customerObj.address);
-        $('.customer-debt').html(customerObj.debt);  
+        $('.customer-debt').html(customerObj.debt);
+        $('.customer-type').html(html);   
+    });
+
+    $('.amount-received').on('keyup', function() {
+        let amountReceived = $(this).val();
+        let totalValue;
+        let text;
+
+        if(isVip) {
+            totalValue = parseInt($('#finalTotal').text().replace(/\D/g,''));
+        }
+        else {
+            totalValue = parseInt($('#total').text().replace(/\D/g,''));
+        }
+        
+        if(amountReceived > 0 && totalValue >= amountReceived) {
+            let change = totalValue - amountReceived;
+
+            text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(change);   
+        }
+        else {
+            text = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(0); 
+        }
+
+        $('#change').text(text);
+    });
+
+    $('.add-customer-btn').on('click', function() {
+        let name = $('#addCustomerName').val();
+        let phone = $('#addCustomerPhone').val();
+        let address = $('#addCustomerAddress').val();
+        let email = $('#addCustomerEmail').val();
+        
+        if(name && phone && address && email) {
+            loading.modal('show');
+            $.ajax({
+                type:'POST',
+                url:'customer/add',
+                data:{name:name, phone:phone, address:address, email:email,_token: token},
+                success:function(data){
+                    loading.modal('hide');
+
+                    if(data.success) {
+                        $.notify("Success", "success");
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
+                    }
+                    else {
+                        $.notify("Error", "error");
+                    }
+                },
+                error: function (data) {
+                    loading.modal('hide');
+                    $.notify("Error", "error");
+                }
+            });
+        }
+        else {
+            $.notify("Please complete all information", "warn");
+        }
     });
 });

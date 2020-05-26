@@ -55,6 +55,8 @@ Route::group(['middleware' => 'check.user'], function () {
     Route::post('/customer/delete', 'CustomerController@delete');
     Route::post('/customer/add', 'CustomerController@add');
     Route::get('/customer/detail/{id}', 'CustomerController@detail');
+    Route::get('/customer/birthday', 'CustomerController@birthday');
+    Route::post('/customer/birthday', 'CustomerController@birthdaySearch');
     
     Route::get('/inputreceipt/index', 'InputReceiptController@index');
     Route::get('/inputreceipt/detail/{id}', 'InputReceiptController@detail');

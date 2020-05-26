@@ -126,6 +126,7 @@
 	        <div class="form-group">
 			    <label>{{ trans('user.username') }}</label>
 			    <input type="text" class="form-control" id="addUserName">
+				<small id="emailHelp" class="form-text text-muted">{{ trans('user.password_for_new_user_policy') }}</small>
 			</div>
 			<div class="form-group">
 			    <label>{{ trans('user.name') }}</label>

@@ -22,6 +22,7 @@ return [
     'required_re-password' => 'Vui lòng xác thực mật khẩu',
     'passwords_not_same' => 'Mật khẩu và mật khẩu xác thực không trùng khớp',
     'change_password_successfully' => 'Đổi mật khẩu thành công',
+    'password_for_new_user_policy' => 'Khi tạo mới người dùng, mật khẩu mặc định là 1',
 
     'user_profile' => 'Thông tin người dùng',
     'username' => 'Tên đăng nhập',

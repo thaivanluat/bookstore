@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use DB;
+use PDF;
 
 class CustomerController extends Controller
 {
@@ -34,7 +35,8 @@ class CustomerController extends Controller
                                 'HoTen' => $input['name'],
                                 'DienThoai' => $input['phone'],
                                 'DiaChi' => $input['address'],
-                                'Email' => $input['email']
+                                'Email' => $input['email'],
+                                'SinhNhat' => $input['birthday']
                                 ]);
 
         }
@@ -89,7 +91,9 @@ class CustomerController extends Controller
                     'HoTen' => $input['name'],
                     'DienThoai' => $input['phone'],
                     'DiaChi' => $input['address'],
+                    'SinhNhat' =>$input['birthday'],
                     'Email' => $input['email'],
+                    'TrangThai' => 'normal',
                     'TongNo' => 0
                 ]
             ]);
@@ -106,5 +110,32 @@ class CustomerController extends Controller
         }
 
         return response()->json($response);
+    }
+
+    public function birthday() {
+        return View::make("customer.birthday");
+    }
+
+    public function birthdaySearch(Request $request) {
+        $input = $request->all();
+
+        $month = $input['month'];
+        $type = $input['type'];
+
+        $data = DB::table('KHACHHANG')
+                ->whereMonth('SinhNhat', $month)
+                ->where('TrangThai', $type)			
+                ->orderBy('KHACHHANG.MaKhachHang', 'asc')->get();
+        
+        $type = ($type == 'vip') ? trans('customer.vip_customer') : trans('customer.normal_customer');
+
+        if(!empty($input['print'])) {
+            $pdf = PDF::loadView('customer.birthday_print', ['data'=> $data, 'month' => $month, 'type' => $type]);
+            return $pdf->download('customer_list.pdf');
+            // return view::make('customer.birthday_print')->with(['data'=> $data, 'month' => $month, 'type' => $type]);
+        }
+        else {
+            return redirect()->back()->with(['data'=> $data, 'month' => $month, 'type' => $type])->withInput();
+        }        
     }
 }

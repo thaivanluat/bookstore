@@ -49,7 +49,7 @@ declare
 v_debt khachhang.tongno%type;
 begin
         UPDATE KHACHHANG
-        SET TongNo = :new.TongTien
+        SET TongNo = TongNo + :new.TongTien
         WHERE MaKhachHang = :new.MaKhachHang;
 end;
 
@@ -122,7 +122,7 @@ begin
     year_var :=  EXTRACT(YEAR FROM sysdate);
     month_var :=  EXTRACT(MONTH FROM sysdate);
     insert into baocaocongno values 
-    (:new.makhachang, month_var, year_var, 0, 0, 0, 0);
+    (:new.makhachhang, month_var, year_var, 0, 0, 0, 0);
 end;
 
 --Trigger table CHITIETPHIEUNHAPSACH: Soluong at least 150. Just import books with inventory less than 300
@@ -292,11 +292,18 @@ end;
 
 -- proc_update_total_HoaDon
 -- procedure calculate total of invoice
-create or replace procedure proc_update_total_HoaDon(mahd HOADON.MaHoaDon%TYPE)
+create or replace NONEDITIONABLE PROCEDURE "PROC_UPDATE_TOTAL_HOADON" (mahd HOADON.MaHoaDon%TYPE)
 as 
 total number;
+discount thamso.tilegiamgia%type;
+v_trangthai KHACHHANG.TRANGTHAI%TYPE;
 begin
     total:=0;
+    select tilegiamgia into discount from THAMSO WHERE ROWNUM = 1;
+    select trangthai into v_trangthai 
+    from HOADON inner join KHACHHANG ON KHACHHANG.MaKhachHang = HOADON.MaKhachHang 
+    WHERE MaHoaDon = mahd;
+    
     for item in (select soluong, dongia 
                     from CHITIETHOADON CTHD 
                     inner join SACH S ON S.MaSach = CTHD.MaSach
@@ -304,6 +311,10 @@ begin
     LOOP
     total:= total + item.dongia*item.soluong;
     END LOOP;
+    IF v_trangthai = 'vip'
+    THEN 
+        total:= total - (total*(discount/100));
+    END IF;
     update HOADON 
     set TongTien = total
     where MaHoaDon = mahd;

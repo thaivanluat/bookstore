@@ -33,7 +33,15 @@
                 <li class="list-group-item"><strong>{{ trans('customer.customer_name') }}: </strong>{{ $customer->hoten }}</li>
                 <li class="list-group-item"><strong>{{ trans('customer.customer_phone') }}: </strong>{{ $customer->dienthoai }}</li>
                 <li class="list-group-item"><strong>{{ trans('customer.customer_email') }}: </strong>{{ $customer->email }}</li>
+                <li class="list-group-item"><strong>{{ trans('customer.customer_birthday') }}: </strong>{{ date('d-m-Y', strtotime($customer->sinhnhat)) }}</li>
                 <li class="list-group-item"><strong>{{ trans('customer.customer_address') }}: </strong>{{ $customer->diachi }}</li>
+                <li class="list-group-item"><strong>{{ trans('customer.customer_type') }}: </strong>
+                    @if($customer->trangthai == 'vip')
+                        <span class="badge badge-warning">{{trans('customer.vip_customer')}}</span>
+                    @else
+                        <span class="badge badge-primary">{{trans('customer.normal_customer')}}</span>
+                    @endif
+                </li>
                 <li class="list-group-item"><strong>{{ trans('customer.customer_debt') }}: </strong>{{ number_format($customer->tongno) }} ₫</li>
             </ul>
         </div>

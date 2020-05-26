@@ -62,7 +62,13 @@ class InputReceiptController extends Controller
     public function getBookEditionOptionList(Request $request) {
         $input = $request->all();
 
-        $data = DB::table('SACH')->where('MaDauSach', $input['id'])->orderBy('MaSach', 'desc')->get();
+        $data = DB::table('SACH')
+                ->join('DAUSACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
+                ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
+                ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
+                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+                ->select('SACH.*', 'THELOAI.TenTheLoai', 'TACGIA.TenTacGia')
+                ->where('SACH.MaDauSach', $input['id'])->orderBy('MaSach', 'desc')->get();
         return response()->json($data);
     }
 

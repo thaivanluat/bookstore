@@ -110,7 +110,7 @@ begin
     year_var :=  EXTRACT(YEAR FROM sysdate);
     month_var :=  EXTRACT(MONTH FROM sysdate);
     insert into baocaocongno values 
-    (:new.makhachang, month_var, year_var, 0, 0, 0, 0);
+    (:new.makhachhang, month_var, year_var, 0, 0, 0, 0);
 end;
 
 -- Update baocaocongno when create hoadon

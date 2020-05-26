@@ -15,5 +15,8 @@ return [
     'ratio_of_selling_price' => 'Tỉ lệ tính đơn giá bán so với đơn giá nhập',
     'allow_exceed_debt' => 'Cho phép vượt tổng nợ',
     'change_policy_btn' => 'Thay đổi quy định',
+    'total_value_to_become_vip' => 'Mức tiền cập nhật vip',
+    'ratio_of_discount_price' => 'Tỉ lệ giảm giá khuyến mãi',
+    'discount_ratio_is_not_hundred' => 'Tỉ lệ giảm giá không được lớn hơn 100'
    
 ];
