@@ -212,7 +212,12 @@ $(function() {
                         }, 1000);
                     }
                     else {
-                        $.notify("Error", "error");
+                        if(data.message) {
+                            $.notify(data.message, "error");      
+                        }
+                        else {
+                            $.notify("Error", "error");
+                        }       
                     }
                 },
                 error: function (data) {

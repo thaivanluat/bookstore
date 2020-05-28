@@ -107,6 +107,7 @@ class InputReceiptController extends Controller
 
         } catch (\Exception $e) {
             $queryResult = 0;
+            $errorCode = $e->getCode();
         }
 
         $response = [];
@@ -115,6 +116,19 @@ class InputReceiptController extends Controller
     
         if($queryResult === 0) {
             $response['success'] = false;
+            $response['message'] = '';
+
+            if($errorCode == 20001) {
+                $query = DB::table('THAMSO')->select('SoLuongNhapToiThieu')->first();
+                $value = $query->soluongnhaptoithieu;
+                $response['message'] = trans('inputreceipt.min_input_receipt_value_error', ['value' => $value]);
+            }
+            
+            if($errorCode == 20002) {
+                $query = DB::table('THAMSO')->select('SoLuongTonDeNhapToiDa')->first();
+                $value = $query->soluongtondenhaptoida;
+                $response['message'] = trans('inputreceipt.max_input_receipt_stock_value_error', ['value' => $value]);
+            }
         }
 
         return response()->json($response);

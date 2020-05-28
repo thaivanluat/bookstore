@@ -31,6 +31,8 @@ return [
     'input_receipt_list' => 'Danh sách phiếu nhập sách',
     'input_receipt_id' => 'Mã phiếu nhập sách',
     'date_created' => 'Ngày tạo',
+    'min_input_receipt_value_error' => 'Số lượng nhập tối thiểu là :value',
+    'max_input_receipt_stock_value_error' => 'Chỉ nhập sách có lượng tồn nhỏ hơn :value',
 
     'add_book' => 'Thêm sách',
     'create' => 'Tạo',

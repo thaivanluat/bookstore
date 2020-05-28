@@ -127,6 +127,7 @@ class InvoiceController extends Controller
 
         } catch (\Exception $e) {
             $queryResult = 0;
+            $errorCode = $e->getCode();
         }
 
         $response = [];
@@ -135,6 +136,19 @@ class InvoiceController extends Controller
     
         if($queryResult === 0) {
             $response['success'] = false;
+            $response['message'] = '';
+
+            if($errorCode == 20003) {
+                $query = DB::table('THAMSO')->select('TongNoToiDa')->first();
+                $value = $query->tongnotoida;
+                $response['message'] = trans('invoice.max_debt_value_error', ['value' => $value]);
+            }
+            
+            if($errorCode == 20004) {
+                $query = DB::table('THAMSO')->select('LuongTonSauKhiBanToiThieu')->first();
+                $value = $query->luongtonsaukhibantoithieu;
+                $response['message'] = trans('invoice.min_stock_after_sold_value_error', ['value' => $value]);
+            }
         }
 
         return response()->json($response);

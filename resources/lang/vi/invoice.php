@@ -43,6 +43,8 @@ return [
     'change' => 'Còn lại',
     'discount' => 'Giảm giá',
     'final_total' => 'Thành tiền',
+    'max_debt_value_error' => 'Không bán cho khách hàng có nợ lớn hơn :value đ',
+    'min_stock_after_sold_value_error' => 'Số lượng tồn sau khi bán sách phải lớn hơn :value',
 
     'add_book' => 'Thêm sách',
     'create' => 'Tạo',
