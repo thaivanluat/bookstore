@@ -8,6 +8,7 @@ return [
     'book_management' => 'Quản lý sách',
     'invoice' => 'Hóa đơn',
     'input_receipt' => 'Phiếu nhập sách',
+    'inventory' => 'Kiểm kho',
     'receipt' => 'Phiếu thu',
     'report' => 'Báo cáo',
     'debt_report' => 'Báo cáo công nợ',

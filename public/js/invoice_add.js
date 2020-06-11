@@ -414,20 +414,21 @@ $(function() {
         let phone = $('#addCustomerPhone').val();
         let address = $('#addCustomerAddress').val();
         let email = $('#addCustomerEmail').val();
+        let birthday =  $('#addCustomerBirthday').val();
         
-        if(name && phone && address && email) {
+        if(name && phone && address && email && birthday) {
             loading.modal('show');
             $.ajax({
                 type:'POST',
                 url:'customer/add',
-                data:{name:name, phone:phone, address:address, email:email,_token: token},
+                data:{name:name, phone:phone, address:address,birthday: birthday, email:email,_token: token},
                 success:function(data){
                     loading.modal('hide');
 
                     if(data.success) {
                         $.notify("Success", "success");
                         setTimeout(function() {
-                            location.reload();
+                            $('#addCustomerModal').modal('hide');
                         }, 1000);
                     }
                     else {

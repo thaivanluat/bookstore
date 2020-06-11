@@ -61,10 +61,16 @@ Route::group(['middleware' => 'check.user'], function () {
     Route::get('/inputreceipt/index', 'InputReceiptController@index');
     Route::get('/inputreceipt/detail/{id}', 'InputReceiptController@detail');
     Route::get('/inputreceipt/add', 'InputReceiptController@addView');
-    Route::get('/inputreceipt/edit/{id}', 'InputReceiptController@editView'); // ???
     Route::post('/inputreceipt/getBookEditionOptionlist', 'InputReceiptController@getBookEditionOptionList');
     Route::post('/inputreceipt/add', 'InputReceiptController@add');
     Route::post('/inputreceipt/delete', 'InputReceiptController@delete');
+
+    Route::get('/inventory/index', 'InventoryController@index');
+    Route::get('/inventory/detail/{id}', 'InventoryController@detail');
+    Route::get('/inventory/add', 'InventoryController@addView');
+    Route::post('/inventory/getBookEditionOptionlist', 'InventoryController@getBookEditionOptionList');
+    Route::post('/inventory/add', 'InventoryController@add');
+    Route::post('/inventory/delete', 'InventoryController@delete');
     
     Route::get('/invoice/index', 'InvoiceController@index');
     Route::get('/invoice/detail/{id}', 'InvoiceController@detail');

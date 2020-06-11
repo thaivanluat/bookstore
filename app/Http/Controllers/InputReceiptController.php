@@ -55,10 +55,6 @@ class InputReceiptController extends Controller
         return View::make("inputreceipt.add")->with(['book' => $data]);
     }
 
-    public function editView($id) {
-        return View::make("inputreceipt.edit");
-    }
-
     public function getBookEditionOptionList(Request $request) {
         $input = $request->all();
 

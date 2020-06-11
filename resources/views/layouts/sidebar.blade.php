@@ -55,6 +55,12 @@
       <span>{{ trans('app.input_receipt') }}</span></a>
   </li>
 
+  <li class="nav-item @if (Request::is('inventory/*')) active @endif">
+    <a class="nav-link" href="{{ url('/inventory/index') }}">
+      <i class="fas fa-fw fa-box"></i>
+      <span>{{ trans('app.inventory') }}</span></a>
+  </li>
+
   <li class="nav-item @if (Request::is('customer/*')) active @endif">
     <a class="nav-link" href="{{ url('/customer/index') }}">
       <i class="fas fa-fw fa-users"></i>

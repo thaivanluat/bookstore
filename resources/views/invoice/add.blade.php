@@ -186,6 +186,10 @@
 			    <label>{{ trans('customer.customer_email') }}</label>
 			    <input type="email" class="form-control" id="addCustomerEmail">
 			</div>
+			<div class="form-group">
+			    <label>{{ trans('customer.customer_birthday') }}</label>
+			    <input type="date" min="0" class="form-control" id="addCustomerBirthday">
+			</div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('customer.close') }}</button>
