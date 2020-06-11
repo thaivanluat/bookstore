@@ -24,6 +24,7 @@ return [
     'book_edition' => 'Sách',
     'detail_inventory_check' => 'Chi tiết phiếu kiểm kho ',
     'inventory_check' => 'Phiếu kiểm kho',
+    'inventory_check_detail' => 'Chi tiết phiếu kiểm kho',
     'order_number' => 'STT',
     'book_name' => 'Tên sách',
     'category' => 'Thể loại',

@@ -24,6 +24,7 @@ return [
     'book_edition' => 'Sách',
     'detail_input_receipt' => 'Chi tiết phiếu nhập sách ',
     'input_receipt' => 'Phiếu nhập sách',
+    'input_receipt_detail' => 'Chi tiết phiếu nhập sách',
     'order_number' => 'STT',
     'book_name' => 'Tên sách',
     'category' => 'Thể loại',

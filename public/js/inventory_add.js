@@ -9,11 +9,11 @@ $(function() {
 
     // Render options template in select box
     function renderOption(state) {
-        let optionHTML = $('<div><small>Book Edition ID:  </small> <span class="badge badge-primary">'+state.id+'</span></div>'+
-                            '<div><small>Publisher:  </small> <span class="badge badge-info">'+state.publisher+'</span></div>'+
-                            '<div><small>Publising Year:  </small> <span class="badge badge-info">'+state.publishing_year+'</span></div>'+
-                            '<div><small>Price:  </small> <span class="badge badge-success">'+state.price+' VND</span></div>'+
-                            '<div><small>Quantity:  </small> <span class="badge badge-success">'+state.quantity+'</span></div>');
+        let optionHTML = $('<div><small>Mã sách:  </small> <span class="badge badge-primary">'+state.id+'</span></div>'+
+                            '<div><small>Nhà xuất bản:  </small> <span class="badge badge-info">'+state.publisher+'</span></div>'+
+                            '<div><small>Năm xuât bản:  </small> <span class="badge badge-info">'+state.publishing_year+'</span></div>'+
+                            '<div><small>Giá:  </small> <span class="badge badge-success">'+state.price+' VND</span></div>'+
+                            '<div><small>Số lượng tồn:  </small> <span class="badge badge-success">'+state.quantity+'</span></div>');
         return optionHTML;
     }
 
@@ -43,12 +43,12 @@ $(function() {
     });
 
     $('#addBook').val([]).select2({
-        placeholder: "Select a Book",
+        placeholder: "Chọn đầu sách",
         theme: "bootstrap"
     });
 
     $('#addBookEdition').val([]).select2({
-        placeholder: "Select Book edition",
+        placeholder: "Chọn sách",
         theme: "bootstrap"
     });
 

@@ -5,12 +5,12 @@ $(function() {
 
     // Render customer options template
     function renderCustomerOption(state) {
-        let optionHTML = $('<div><small>Customer ID:  </small> <span class="badge badge-primary">'+state.id+'</span></div>'+
-                            '<div><small>Customer Name:  </small> <span class="badge badge-info">'+state.name+'</span></div>'+
-                            '<div><small>Phone:  </small> <span class="badge badge-info">'+state.phone+'</span></div>'+
+        let optionHTML = $('<div><small>Mã khách hàng:  </small> <span class="badge badge-primary">'+state.id+'</span></div>'+
+                            '<div><small>Tên khách hàng:  </small> <span class="badge badge-info">'+state.name+'</span></div>'+
+                            '<div><small>Số điện thoại:  </small> <span class="badge badge-info">'+state.phone+'</span></div>'+
                             '<div><small>Email:  </small> <span class="badge badge-info">'+state.email+' </span></div>'+
-                            '<div><small>Address:  </small> <span class="badge badge-info">'+state.address+' </span></div>'+
-                            '<div><small>Debt:  </small> <span class="badge badge-danger">'+state.debt+' VND</span></div>');
+                            '<div><small>Địa chỉ:  </small> <span class="badge badge-info">'+state.address+' </span></div>'+
+                            '<div><small>Nợ:  </small> <span class="badge badge-danger">'+state.debt+' VND</span></div>');
         if(state.name) {
             return optionHTML;
         }
@@ -24,7 +24,7 @@ $(function() {
 
     $("#customerSearch").select2({
         minimumInputLength: 1,
-        placeholder: { name:'Please select customer'},
+        placeholder: { name:'Chọn khách hàng'},
         theme: "bootstrap",
         ajax: {
             type: 'POST',

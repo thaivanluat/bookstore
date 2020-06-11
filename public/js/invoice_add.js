@@ -13,11 +13,11 @@ $(function() {
 
     // Render options template in select box
     function renderOption(state) {
-        let optionHTML = $('<div><small>Book Edition ID:  </small> <span class="badge badge-primary">'+state.id+'</span></div>'+
-                            '<div><small>Publisher:  </small> <span class="badge badge-info">'+state.publisher+'</span></div>'+
-                            '<div><small>Publising Year:  </small> <span class="badge badge-info">'+state.publishing_year+'</span></div>'+
-                            '<div><small>Price:  </small> <span class="badge badge-success">'+state.price+' VND</span></div>'+
-                            '<div><small>Quantity:  </small> <span class="badge badge-success">'+state.quantity+'</span></div>');
+        let optionHTML = $('<div><small>Mã sách:  </small> <span class="badge badge-primary">'+state.id+'</span></div>'+
+                            '<div><small>Nhà xuất bản:  </small> <span class="badge badge-info">'+state.publisher+'</span></div>'+
+                            '<div><small>Năm xuất bản:  </small> <span class="badge badge-info">'+state.publishing_year+'</span></div>'+
+                            '<div><small>Giá:  </small> <span class="badge badge-success">'+state.price+' VND</span></div>'+
+                            '<div><small>Số lượng tồn:  </small> <span class="badge badge-success">'+state.quantity+'</span></div>');
         return optionHTML;
     }
 
@@ -38,13 +38,13 @@ $(function() {
             type = "Normal";
             style="primary";
         }
-        let optionHTML = $('<div><small>Customer ID:  </small> <span class="badge badge-primary">'+state.id+'</span></div>'+
-                            '<div><small>Customer Name:  </small> <span class="badge badge-info">'+state.name+'</span></div>'+
-                            '<div><small>Phone:  </small> <span class="badge badge-info">'+state.phone+'</span></div>'+
+        let optionHTML = $('<div><small>Mã khách hàng:  </small> <span class="badge badge-primary">'+state.id+'</span></div>'+
+                            '<div><small>Tên khách hàng:  </small> <span class="badge badge-info">'+state.name+'</span></div>'+
+                            '<div><small>Số điện thoại:  </small> <span class="badge badge-info">'+state.phone+'</span></div>'+
                             '<div><small>Email:  </small> <span class="badge badge-info">'+state.email+' </span></div>'+
-                            '<div><small>Address:  </small> <span class="badge badge-info">'+state.address+' </span></div>'+
-                            '<div><small>Debt:  </small> <span class="badge badge-danger">'+state.debt+' VND</span></div>'+
-                            '<div><small>Type:  </small> <span class="badge badge-'+style+'">'+type+' </span></div>');
+                            '<div><small>Địa chỉ:  </small> <span class="badge badge-info">'+state.address+' </span></div>'+
+                            '<div><small>Nợ:  </small> <span class="badge badge-danger">'+state.debt+' VND</span></div>'+
+                            '<div><small>Loại khách hàng:  </small> <span class="badge badge-'+style+'">'+type+' </span></div>');
         if(state.name) {
             return optionHTML;
         }
@@ -115,12 +115,12 @@ $(function() {
     });
 
     $('#addBook').val([]).select2({
-        placeholder: "Select a Book",
+        placeholder: "Chọn đầu sách",
         theme: "bootstrap"
     });
 
     $('#addBookEdition').val([]).select2({
-        placeholder: "Select Book edition",
+        placeholder: "Chọn sách",
         theme: "bootstrap"
     });
 
@@ -322,7 +322,7 @@ $(function() {
 
     $("#customerSearch").select2({
         minimumInputLength: 1,
-        placeholder: { name:'Please select customer'},
+        placeholder: { name:'Chọn khách hàng'},
         theme: "bootstrap",
         ajax: {
             type: 'POST',

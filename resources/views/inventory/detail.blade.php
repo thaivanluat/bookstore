@@ -7,7 +7,7 @@
     <link href="vendor/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
 @stop
 
-@section('page-heading', trans('inventory.inventory_check'))
+@section('page-heading', trans('inventory.inventory_check_detail'))
         
 @section('content')
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">

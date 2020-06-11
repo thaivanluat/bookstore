@@ -12,7 +12,7 @@
 	</style>
 @stop
 
-@section('page-heading', trans('inputreceipt.input_receipt'))
+@section('page-heading', trans('inputreceipt.input_receipt_detail'))
         
 @section('content')
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
