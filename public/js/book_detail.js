@@ -20,30 +20,32 @@ $(function() {
         let publishingYear = $('#bookPublishingYear').val();
         let price = $('#bookPrice').val();
 
-        loading.modal('show');
+        if(price) {
+            loading.modal('show');
 
-        $.ajax({
-           type:'POST',
-           url:'bookedition/edit',
-           data:{id:bookEditionId, publisher:publisherName, publishing_year:publishingYear, price:price, _token: token},
-           success:function(data){
-                loading.modal('hide');
+            $.ajax({
+            type:'POST',
+            url:'bookedition/edit',
+            data:{id:bookEditionId, publisher:publisherName, publishing_year:publishingYear, price:price, _token: token},
+            success:function(data){
+                    loading.modal('hide');
 
-                if(data.success) {
-                    $.notify("Success", "success");
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1000);
-                }
-                else {
+                    if(data.success) {
+                        $.notify("Success", "success");
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
+                    }
+                    else {
+                        $.notify("Error", "error");
+                    }
+            },
+            error: function (data) {
+                    loading.modal('hide');
                     $.notify("Error", "error");
                 }
-           },
-           error: function (data) {
-                loading.modal('hide');
-                $.notify("Error", "error");
-            }
-        });
+            });
+        }
     });
 
     $('.delete-button').on('click', function() {

@@ -45,6 +45,8 @@ return [
     'vip_customer_checkbox' => 'Khách hàng vip',
     'required_customer_type' => 'Vui lòng chọn loại khách hàng',
     'list_customer_has_birthday' => 'Danh sách khách hàng :type có sinh nhật trong tháng :month',
+    'customer_debt_expired_date' => 'Hạn nợ',
+    'none' => 'Không có',
 
     'print_customer_list' => 'In danh sách',
      'edit_customer' => 'Chỉnh sửa khách hàng',

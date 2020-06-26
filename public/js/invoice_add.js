@@ -62,7 +62,7 @@ $(function() {
         $('#addBookEdition').select2('destroy');
 
         $('#addBookEdition').val([]).select2({
-            placeholder: "Select Book edition",
+            placeholder: "Chọn sách",
             theme: "bootstrap"
         });
     }
@@ -155,7 +155,7 @@ $(function() {
                 
                     $('#addBookEdition').select2({
                         data: optionList,
-                        placeholder: "Select Book edition",
+                        placeholder: "Chọn sách",
                         theme: "bootstrap",
                         templateSelection: renderSelection,
                         templateResult: renderOption

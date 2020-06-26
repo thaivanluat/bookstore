@@ -23,7 +23,8 @@ class PolicyController extends Controller
             'min_stock_after_sold_value' => 'required|min:0|integer',
             'ratio_of_selling_price' => 'required|min:0|integer|not_in:0',
             'total_value_to_become_vip' => 'required|min:0|integer|not_in:0',
-            'ratio_of_discount_price' => 'required|min:0|max:100|integer'
+            'ratio_of_discount_price' => 'required|min:0|max:100|integer',
+            'expired_debt_days' => 'required|min:0|integer',
             ],
             ['required' => trans('policy.required_information'),
             'min' => trans('policy.min_greater_than_zero'),
@@ -44,7 +45,8 @@ class PolicyController extends Controller
                                 'TiLeTinhDonGiaBan' => $request->input('ratio_of_selling_price'),
                                 'ChoPhepVuotTongNo' => $isAllowed,
                                 'muc_tien_capnhat_vip' => $request->input('total_value_to_become_vip'),
-                                'TiLeGiamGia' => $request->input('ratio_of_discount_price')
+                                'TiLeGiamGia' => $request->input('ratio_of_discount_price'),
+                                'HanNo' => $request->input('expired_debt_days')
                                 ]);
 
         }

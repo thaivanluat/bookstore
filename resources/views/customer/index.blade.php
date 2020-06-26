@@ -28,27 +28,35 @@
 							<th>{{ trans('customer.customer_birthday') }}</th>
                             <th>{{ trans('customer.customer_debt') }}</th>
 							<th>{{ trans('customer.customer_type') }}</th>
+							<th>{{ trans('customer.customer_debt_expired_date') }}</th>
 							<th>{{ trans('customer.action') }}</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach ($data as $customer)
 						<tr>
-							<th class="customer-id"><a href="{{url('/customer/detail', [$customer->makhachhang])}}">{{ $customer->makhachhang }}</a></th>
+							<th  class="customer-id"><a href="{{url('/customer/detail', [$customer->makhachhang])}}">{{ $customer->makhachhang }}</a></th>
 							<th class="customer-name"><a href="{{url('/customer/detail', [$customer->makhachhang])}}">{{ $customer->hoten }}</a></th>
 							<th class="customer-phone">{{ $customer->dienthoai }}</th>
                             <th class="customer-address">{{ $customer->diachi }}</th>
                             <th class="customer-email">{{ $customer->email }}</th>
-							<th class="customer-birthday">{{ date('d-m-Y', strtotime($customer->sinhnhat)) }}</th>
+							<th style="width: 10%" class="customer-birthday">{{ date('d-m-Y', strtotime($customer->sinhnhat)) }}</th>
                             <th style="text-align: right;" class="customer-total-debt">{{ number_format($customer->tongno) }}</th>
-							<th class="customer-type" style="text-align: center;">
+							<th style="width: 5%" class="customer-type" style="text-align: center;">
 							@if($customer->trangthai == 'vip')
 								<span class="badge badge-warning">{{trans('customer.vip_customer')}}</span>
 							@else
 								<span class="badge badge-primary">{{trans('customer.normal_customer')}}</span>
 							@endif
 							</th>
-							<th style="text-align: center; width: 20%;">
+							<th style="width: 10%" class="customer-debt-expired-date">
+							@if($customer->hanno)
+								{{ date('d-m-Y', strtotime($customer->hanno)) }}
+							@else
+								<span>{{trans('customer.none')}}</span>
+							@endif
+							</th>
+							<th style="text-align: center; width: 25%;">
 								<input type="hidden" class="customer-id" value="{{ $customer->makhachhang }}">
 								<button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal">{{ trans('customer.edit') }}</button>
 								<button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteModal">{{ trans('customer.delete') }}</button>

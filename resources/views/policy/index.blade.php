@@ -174,6 +174,15 @@
                             <span>&nbsp %</span>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <label for="exampleInputEmail1">{{trans('policy.expired_debt_days')}}</label>
+                        </div>
+                        <div class="form-group form-inline col-sm-4">
+                            <input type="number" min="0" class="form-control" name="expired_debt_days"  aria-describedby="emailHelp" value="{{ $data->hanno }}">
+                            <span>&nbsp {{trans('policy.day')}}</span>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-sm m-t-10">{{trans('policy.change_policy_btn')}}</button>
                 </form>
             </div>

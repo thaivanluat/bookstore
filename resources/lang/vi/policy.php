@@ -17,6 +17,8 @@ return [
     'change_policy_btn' => 'Thay đổi quy định',
     'total_value_to_become_vip' => 'Mức tiền cập nhật vip',
     'ratio_of_discount_price' => 'Tỉ lệ giảm giá khuyến mãi',
-    'discount_ratio_is_not_hundred' => 'Tỉ lệ giảm giá không được lớn hơn 100'
+    'discount_ratio_is_not_hundred' => 'Tỉ lệ giảm giá không được lớn hơn 100',
+    'expired_debt_days' => 'Hạn nợ',
+    'day' => 'ngày'
    
 ];

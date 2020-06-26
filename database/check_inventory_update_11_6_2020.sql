@@ -9,7 +9,7 @@ CREATE SEQUENCE S_MAPHIEUKIEM_ID
 
 create table PHIEUKIEMKHO (
     MaPhieuKiem NUMBER(8,0) NOT NULL,
-    NguoiKiem NUMBER(8,0) NOT NULL,
+    NguoiTao NUMBER(8,0) NOT NULL,
     NgayKiem date NOT NULL
 );
 

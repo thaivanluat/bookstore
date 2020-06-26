@@ -28,7 +28,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Session::get('user')->hoten }}</span>
-                <img class="img-profile rounded-circle" src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg">
+                <img class="img-profile rounded-circle" src="{{url('/img/admin.jpg')}}">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
