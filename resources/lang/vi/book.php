@@ -22,6 +22,7 @@ return [
     'publishing_year' => 'Năm xuất bản',
     'price' => 'Giá tiền',
     'amount' => 'Số lượng',
+    'book_id' => 'Mã sách',
 
     'edit_book' => 'Chỉnh sửa đầu sách',
     'delete_book' => 'Xóa đầu sách',

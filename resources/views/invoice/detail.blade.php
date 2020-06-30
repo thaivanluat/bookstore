@@ -49,6 +49,7 @@
 					<thead>
 						<tr>
 							<th>{{trans('invoice.order_number')}}</th>
+							<th>{{trans('invoice.book_id')}}</th>
 							<th>{{trans('invoice.name')}}</th>
 							<th>{{trans('invoice.category')}}</th>
 							<th>{{trans('invoice.author')}}</th>
@@ -63,6 +64,7 @@
 						@foreach ($data as $key=>$invoiceItem)
 						<tr>
                             <th>{{$key+1 }}</th>
+							<th class="invoice-item-id">{{ $invoiceItem->masach }}</th>
 							<th class="invoice-item-name"><a href="{{url('/book/detail', [$invoiceItem->madausach])}}">{{ $invoiceItem->tendausach }}</a></th>
 							<th class="invoice-item-category"><a href="{{url('/category/detail', [$invoiceItem->matheloai])}}">{{ $invoiceItem->tentheloai }}</a></th>
 							<th class="invoice-item-author"><a href="{{url('/author/detail', [$invoiceItem->matacgia])}}">{{ $invoiceItem->tentacgia }}</a></th>

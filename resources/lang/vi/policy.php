@@ -19,6 +19,7 @@ return [
     'ratio_of_discount_price' => 'Tỉ lệ giảm giá khuyến mãi',
     'discount_ratio_is_not_hundred' => 'Tỉ lệ giảm giá không được lớn hơn 100',
     'expired_debt_days' => 'Hạn nợ',
-    'day' => 'ngày'
+    'day' => 'ngày',
+    'book_give_away' => 'Sách tặng',
    
 ];

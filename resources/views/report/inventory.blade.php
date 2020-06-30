@@ -35,7 +35,8 @@
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                            <tr>  
+                                <th>{{ trans('report.book_id') }}</th>  
                                 <th>{{ trans('report.book_name') }}</th>
                                 <th>{{ trans('report.publisher') }}</th>
                                 <th>{{ trans('report.publishing_year') }}</th>
@@ -48,6 +49,7 @@
                         <tbody>
                             @foreach (Session::get('data') as $item)
                             <tr>
+                                <th>{{ $item->masach }}</th>
                                 <th><a href="{{url('/book/detail', [$item->madausach])}}">{{ $item->tendausach }}</a></th>
                                 <th>{{ $item->nhaxuatban }}</th>
                                 <th>{{ $item->namxuatban }}</th>

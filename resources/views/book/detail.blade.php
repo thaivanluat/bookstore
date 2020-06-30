@@ -21,7 +21,8 @@
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>{{ trans('book.book_edition_name') }}</th>
+							<th>{{ trans('book.book_id') }}</th>
+							<th>{{ trans('book.book_edition_name') }}</th>	
 							<th>{{ trans('book.category') }}</th>
 							<th>{{ trans('book.author') }}</th>
                             <th>{{ trans('book.publisher') }}</th>
@@ -34,7 +35,8 @@
 					<tbody>
 						@foreach ($data as $book)
 						<tr>
-							<th class="book-name">{{ $name }}</th>
+							<th class="book-id">{{ $book->masach }}</th>
+							<th class="book-name">{{ $name }}</th>	
 							<th class="book-category">{{ $book->tentheloai}}</th>
 							<th class="book-author">{{ $book->tentacgia }}</th>
                             <th class="book-publisher">{{ $book->nhaxuatban }}</th>

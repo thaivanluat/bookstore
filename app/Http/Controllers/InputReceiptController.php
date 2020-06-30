@@ -97,8 +97,9 @@ class InputReceiptController extends Controller
                     ]);
                 }
     
-                DB::statement('call proc_update_price_CHITIETPHIEUNHAPSACH(?)',[$insertId]);
-                DB::statement('call proc_update_total_PhieuNhap(?)',[$insertId]);
+                // DB::statement('call proc_update_price_CHITIETPHIEUNHAPSACH(?)',[$insertId]);
+                // DB::statement('call proc_update_total_PhieuNhap(?)',[$insertId]);
+                DB::statement('call proc_after_create_phieunhap(?)',[$insertId]);
             });
 
         } catch (\Exception $e) {

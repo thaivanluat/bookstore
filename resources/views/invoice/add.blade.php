@@ -92,7 +92,8 @@
     <table class="table" id="listItem">
         <thead>
             <tr>
-                <th scope="col" style="width: 25%">{{trans('invoice.name')}}</th>
+				<th scope="col" style="width: 3%">{{trans('invoice.book_id')}}</th>
+                <th scope="col" style="width: 22%">{{trans('invoice.name')}}</th>
                 <th scope="col" style="width: 15%">{{trans('invoice.publisher')}}</th>
                 <th scope="col" style="width: 10%">{{trans('invoice.publishing_year')}}</th>
                 <th scope="col" style="width: 10%">{{trans('invoice.quanlity')}}</th>
@@ -104,6 +105,7 @@
         <tbody>
             <tr class="blank-item">
 				<input type="hidden" class="item-id">
+				<td class="book-id"></td>
                 <td class="book-name">
                     <button type="button" class="btn btn-success choose-btn" data-toggle="modal" data-target="#chooseModal">{{trans('invoice.choose_book')}}</button>
                 </td>

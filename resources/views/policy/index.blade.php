@@ -183,6 +183,14 @@
                             <span>&nbsp {{trans('policy.day')}}</span>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <label for="exampleInputEmail1">{{trans('policy.book_give_away')}}</label>
+                        </div>
+                        <div class="form-group form-inline col-sm-2">
+                            <input type="number" min="0" class="form-control" name="book_give_away_id"  aria-describedby="emailHelp" value="{{ $data->masachtang }}">
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-sm m-t-10">{{trans('policy.change_policy_btn')}}</button>
                 </form>
             </div>

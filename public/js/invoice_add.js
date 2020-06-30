@@ -205,6 +205,7 @@ $(function() {
             item.find('.item-id').val(bookEditionObj.id);
             item.find('.choose-btn').remove();
             item.find('.book-name').html(bookObj.text);
+            item.find('.book-id').html(bookEditionObj.id);
             item.find('.book-publisher').html(bookEditionObj.publisher);
             item.find('.book-publishing-year').html(bookEditionObj.publishing_year);
             item.find('.book-quantity').val(0);

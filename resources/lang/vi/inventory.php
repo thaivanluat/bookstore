@@ -10,6 +10,7 @@ return [
     'delete' => 'Xóa',
     'add' => 'Thêm',
     'detail' => 'Chi tiết',
+    'book_id' => 'Mã sách',
 
     'add_inventory_check' => 'Thêm phiếu kiểm kho',
     'total' => 'Tổng cộng',

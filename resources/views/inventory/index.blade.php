@@ -29,7 +29,7 @@
 					<tbody>
 						@foreach ($data as $inventoryCheck)
 						<tr>
-							<th class="inventory-check-name"><a target="_blank" href="{{url('/inputreceipt/detail', [$inventoryCheck->maphieukiem])}}">#{{ $inventoryCheck->maphieukiem }}</a></th>
+							<th class="inventory-check-name"><a target="_blank" href="{{url('/inventory/detail', [$inventoryCheck->maphieukiem])}}">#{{ $inventoryCheck->maphieukiem }}</a></th>
 							<th class="inventory-check-created-date">{{ $inventoryCheck->ngaytao }}</th>
                             <th class="inventory-check-created-user">{{ $inventoryCheck->hoten }}</th>
 							<th style="text-align: center;">

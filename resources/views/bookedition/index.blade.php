@@ -21,6 +21,7 @@
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
+							<th>{{ trans('book.book_id') }}</th>
 							<th>{{ trans('book.book_edition_name') }}</th>
 							<th>{{ trans('book.category') }}</th>
 							<th>{{ trans('book.author') }}</th>
@@ -33,6 +34,7 @@
 					<tbody>
 						@foreach ($data as $book)
 						<tr>
+							<th class="book-id">{{ $book->masach }}</th>
 							<th class="book-name"><a href="{{url('/book/detail', [$book->madausach])}}">{{ $book->tendausach }}</a></th>
 							<th class="book-category"><a href="{{url('/bookcategory/detail', [$book->matheloai])}}">{{ $book->tentheloai}}</a></th>
 							<th class="book-author"><a href="{{url('/author/detail', [$book->matacgia])}}">{{ $book->tentacgia }}</a></th>

@@ -21,5 +21,6 @@ return [
     'customer_phone' => 'Số điện thoại',
     'customer_email' => 'Email',
     'required_month_year_value' => 'Vui lòng chọn ngày tháng',
-    'print_report' => 'In báo cáo'
+    'print_report' => 'In báo cáo',
+    'book_id' => 'Mã sách'
 ];

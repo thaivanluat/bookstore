@@ -35,7 +35,8 @@
     <table class="table" id="listItem">
         <thead>
             <tr>
-                <th scope="col" style="width: 20%">{{trans('inputreceipt.name')}}</th>
+				<th scope="col" style="width: 3%">{{trans('inputreceipt.book_id')}}</th>
+                <th scope="col" style="width: 17%">{{trans('inputreceipt.name')}}</th>
 				<th scope="col" style="width: 8%">{{trans('inputreceipt.category')}}</th>
 				<th scope="col" style="width: 7%">{{trans('inputreceipt.author')}}</th>
                 <th scope="col" style="width: 10%">{{trans('inputreceipt.publisher')}}</th>
@@ -49,6 +50,7 @@
         <tbody>
             <tr class="blank-item">
 				<input type="hidden" class="item-id">
+				<td class="book-id"></td>
                 <td class="book-name">
                     <button type="button" class="btn btn-success choose-btn" data-toggle="modal" data-target="#chooseModal">{{trans('inputreceipt.choose_book')}}</button>
                 </td>

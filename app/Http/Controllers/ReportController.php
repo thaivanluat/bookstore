@@ -36,6 +36,7 @@ class ReportController extends Controller
 
 		if(!empty($input['print'])) {
 			$pdf = PDF::loadView('report.inventory_print', ['data'=> $data, 'month' => $month, 'year' => $year]);
+			$pdf->setPaper('a4', 'landscape');
 			return $pdf->download('report.pdf');
 			// return view::make('report.inventory_print')->with(['data'=> $data, 'month' => $month, 'year' => $year]);
 		}
@@ -61,6 +62,7 @@ class ReportController extends Controller
 		
 		if(!empty($input['print'])) {
 			$pdf = PDF::loadView('report.debt_print', ['data'=> $data, 'month' => $month, 'year' => $year]);
+			$pdf->setPaper('a4', 'landscape');
 			return $pdf->download('report.pdf');
 		}
 		else {

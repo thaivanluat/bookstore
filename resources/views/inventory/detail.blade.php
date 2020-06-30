@@ -21,6 +21,7 @@
 					<thead>
 						<tr>
 							<th>{{trans('inventory.order_number')}}</th>
+							<th>{{trans('inventory.book_id')}}</th>
 							<th>{{trans('inventory.book_name')}}</th>
 							<th>{{trans('inventory.category')}}</th>
 							<th>{{trans('inventory.author')}}</th>
@@ -35,6 +36,7 @@
 						@foreach ($data as $key=>$inputItem)
 						<tr>
                             <th>{{ $key+1 }}</th>
+							<th class="input-item-id">{{ $inputItem->masach }}</th>
 							<th class="input-item-name"><a href="{{url('/book/detail', [$inputItem->madausach])}}">{{ $inputItem->tendausach }}</a></th>
 							<th class="input-item-category"><a href="{{url('/category/detail', [$inputItem->matheloai])}}">{{ $inputItem->tentheloai }}</a></th>
 							<th class="input-item-author"><a href="{{url('/author/detail', [$inputItem->matacgia])}}">{{ $inputItem->tentacgia }}</a></th>

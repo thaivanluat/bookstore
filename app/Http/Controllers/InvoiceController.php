@@ -113,8 +113,9 @@ class InvoiceController extends Controller
                     ]);
                 }
     
-                DB::statement('call proc_update_price_CHITIETHOADON(?)',[$insertId]);
-                DB::statement('call proc_update_total_HoaDon(?)',[$insertId]);
+                // DB::statement('call proc_update_price_CHITIETHOADON(?)',[$insertId]);
+                // DB::statement('call proc_update_total_HoaDon(?)',[$insertId]);
+                DB::statement('call proc_after_create_hoadon(?, ?)',[$input['customer_id'], $insertId]);
 
                 DB::insert('insert into PHIEUTHU (MaPhieuThu, MaKhachHang, NgayLap, SoTienThu) 
                 values (?,? , sysdate, ?)', [$insertReceiptId, $input['customer_id'], $input['amount']]);
@@ -122,7 +123,7 @@ class InvoiceController extends Controller
                 DB::statement('call update_baocaocongno(?, ?)',[$input['customer_id'], $insertId]);
 
                 // Check vip and discount
-                DB::statement('call cap_nhat_trang_thai_kh(?)',[$input['customer_id']]);    
+                DB::statement('call capnhat_trangthai(?)',[$input['customer_id']]);    
             });
 
         } catch (\Exception $e) {
