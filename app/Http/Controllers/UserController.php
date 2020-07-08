@@ -50,6 +50,17 @@ class UserController extends Controller
         
         if($user) {
             Session::put('user', $user);
+            $roleObjectArray = DB::table('NGUOIDUNG')
+                ->join('PHANQUYENNGUOIDUNG', 'PHANQUYENNGUOIDUNG.MaNguoiDung', '=', 'NGUOIDUNG.MaNguoiDung')
+                ->where('NGUOIDUNG.MaNguoiDung', $user->manguoidung)
+                ->get();
+            
+            $roles = [];
+            foreach($roleObjectArray as $obj) {
+                $roles[] = $obj->maquyenhan;
+            }
+
+            Session::put('role', $roles);
 
             $remember = $request->input('remember_me');
 

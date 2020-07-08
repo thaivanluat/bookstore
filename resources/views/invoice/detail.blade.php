@@ -94,6 +94,15 @@
 	<div class="footer">
 		<div class="row">
 			<div class="col-sm-9" style="text-align: right">
+				<strong>{{trans('invoice.created_by')}}:</strong> 
+			</div>
+			<div class="col-sm-3" style="text-align: left">
+				<span>{{ $invoice->nguoitao }}</span>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-sm-9" style="text-align: right">
 				<strong>{{trans('invoice.total')}}:</strong> 
 			</div>
 			<div class="col-sm-3" style="text-align: left">

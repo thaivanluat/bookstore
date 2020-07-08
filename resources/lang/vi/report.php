@@ -4,6 +4,8 @@ return [
     'inventory_report_with_time' => 'Báo cáo tồn tháng :month năm :year',
     'inventory_report' => 'Báo cáo tồn',
     'debt_report' => 'Báo cáo công nợ',
+    'staff_report' => 'Báo cáo doanh thu theo từng nhân viên',
+    'customer_report' => 'Báo cáo doanh thu theo từng khách hàng',
     'choose_time' => 'Chọn thời gian',
     'export_report' => 'Xuất báo cáo',
     'book_name' => 'Tên sách',
@@ -22,5 +24,5 @@ return [
     'customer_email' => 'Email',
     'required_month_year_value' => 'Vui lòng chọn ngày tháng',
     'print_report' => 'In báo cáo',
-    'book_id' => 'Mã sách'
+    'book_id' => 'Mã sách',
 ];

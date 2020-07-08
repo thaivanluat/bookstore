@@ -13,6 +13,8 @@ return [
     'report' => 'Báo cáo',
     'debt_report' => 'Báo cáo công nợ',
     'inventory_report' => 'Báo cáo tồn',
+    'staff_report' => 'Báo cáo doanh thu theo <br> nhân viên',
+    'customer_report' => 'Báo cáo doanh thu theo <br> khách hàng',
     'dashboard' => 'Bảng điều khiển',
     'search_book' => 'Tra cứu sách',
     'user' => 'Quản lý người dùng',

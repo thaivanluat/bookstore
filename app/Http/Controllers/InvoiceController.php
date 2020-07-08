@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use DB;
+use Session;
 
 class InvoiceController extends Controller
 {
     public function index() {
         $data = DB::table('HOADON')
                 ->join('KHACHHANG', 'KHACHHANG.MaKhachHang', '=', 'HOADON.MaKhachHang')
-                ->select('HOADON.*', 'KHACHHANG.HoTen')
+                ->join('NGUOIDUNG', 'NGUOIDUNG.MaNguoiDung', '=', 'HOADON.NguoiTao')
+                ->select('HOADON.*', 'KHACHHANG.HoTen','NGUOIDUNG.HoTen as nguoitao')
                 ->orderBy('MaHoaDon', 'desc')->get();
         return View::make("invoice.index")->with(['data' => $data]);
     }
@@ -22,15 +24,15 @@ class InvoiceController extends Controller
             ->join('SACH', 'SACH.MaSach', '=', 'CHITIETHOADON.MaSach')
             ->join('DAUSACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
             ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
-            ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
-            ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+            ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'DAUSACH.MaTacGia')
             ->select('CHITIETHOADON.*', 'SACH.NhaXuatBan', 'SACH.NamXuatBan', 'DAUSACH.TenDauSach', 'DAUSACH.MaDauSach','THELOAI.*', 'TACGIA.TenTacGia', 'TACGIA.MaTacGia')
             ->where('HOADON.MaHoaDon', $id)
             ->orderBy('CHITIETHOADON.MaSach', 'desc')->get();
 
         $invoice = DB::table('HOADON')
                     ->join('KHACHHANG', 'KHACHHANG.MaKhachHang', '=', 'HOADON.MaKhachHang')
-                    ->select('*')
+                    ->join('NGUOIDUNG', 'NGUOIDUNG.MaNguoiDung', '=', 'HOADON.NguoiTao')
+                    ->select('HOADON.MaHoaDon','HOADON.TongTien','HOADON.SoTienTra','KHACHHANG.*','NGUOIDUNG.HoTen as nguoitao')
                     ->where('MaHoaDon', $id)->first();
         return View::make("invoice.detail")->with(['data' => $data, 'invoice' => $invoice]);
     }
@@ -91,12 +93,15 @@ class InvoiceController extends Controller
         $insertId = $sequence->nextValue('S_MAHOADON_ID');
         $insertReceiptId = $sequence->nextValue('S_MAPHIEUTHU_ID');
 
+        $user = Session::get('user');
+        $userId = $user->manguoidung;
+
         $data = $input['data'];
         try {
-            $queryResult = DB::transaction(function() use ($insertId, $data, $input,$insertReceiptId) {
-
-                DB::insert('insert into HOADON (MaHoaDon, NgayLap, MaKhachHang, TongTien, SoTienTra) 
-                values (?,sysdate , ?, ?, ?)', [$insertId, $input['customer_id'], 0, $input['amount']]);
+            $queryResult = DB::transaction(function() use ($insertId, $data, $input,$insertReceiptId, $userId) {
+                
+                DB::insert('insert into HOADON (MaHoaDon, NgayLap, MaKhachHang, TongTien, SoTienTra, NguoiTao) 
+                values (?,sysdate , ?, ?, ?,?)', [$insertId, $input['customer_id'], 0, $input['amount'], $userId]);
 
                 foreach ($data as $dt) {
 
@@ -113,8 +118,6 @@ class InvoiceController extends Controller
                     ]);
                 }
     
-                // DB::statement('call proc_update_price_CHITIETHOADON(?)',[$insertId]);
-                // DB::statement('call proc_update_total_HoaDon(?)',[$insertId]);
                 DB::statement('call proc_after_create_hoadon(?, ?)',[$input['customer_id'], $insertId]);
 
                 DB::insert('insert into PHIEUTHU (MaPhieuThu, MaKhachHang, NgayLap, SoTienThu) 
@@ -122,7 +125,6 @@ class InvoiceController extends Controller
 
                 DB::statement('call update_baocaocongno(?, ?)',[$input['customer_id'], $insertId]);
 
-                // Check vip and discount
                 DB::statement('call capnhat_trangthai(?)',[$input['customer_id']]);    
             });
 

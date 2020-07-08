@@ -99,8 +99,7 @@ class BookEditionController extends Controller
         $data = DB::table('DAUSACH')
                 ->join('SACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
                 ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
-                ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
-                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'DAUSACH.MaTacGia')
                 ->select('SACH.*', 'TACGIA.TenTacGia', 'TACGIA.MaTacGia', 'THELOAI.*','DAUSACH.TenDauSach')
                 ->orderBy('SACH.MaSach', 'desc')->get();
         

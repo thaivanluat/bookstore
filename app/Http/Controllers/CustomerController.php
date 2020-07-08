@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use DB;
 use PDF;
+use Session;
 
 class CustomerController extends Controller
 {
@@ -28,7 +29,8 @@ class CustomerController extends Controller
             $validatedData = $request->validate([
                 'email' => 'email'
             ]);
-            
+            DB::beginTransaction();
+            DB::statement('set transaction isolation level serializable');
             $queryResult = DB::table('KHACHHANG')
                             ->where('MaKhachHang', $input['id'])
                             ->update([
@@ -38,7 +40,7 @@ class CustomerController extends Controller
                                 'Email' => $input['email'],
                                 'SinhNhat' => $input['birthday']
                                 ]);
-
+                                DB::commit();
         }
         catch (\Exception $e) {
             $queryResult = 0;
@@ -130,11 +132,23 @@ class CustomerController extends Controller
         $type = ($type == 'vip') ? trans('customer.vip_customer') : trans('customer.normal_customer');
 
         if(!empty($input['print'])) {
-            $pdf = PDF::loadView('customer.birthday_print', ['data'=> $data, 'month' => $month, 'type' => $type]);
+            if(Session::has('query_customer')) {
+                $pdf = PDF::loadView('customer.birthday_print', ['data'=> Session::get('query_customer'), 'month' => $month, 'type' => $type]);
+            }
+            else {
+                $pdf = PDF::loadView('customer.birthday_print', ['data'=> $data, 'month' => $month, 'type' => $type]);
+            }
+
+            // $pdf = PDF::loadView('customer.birthday_print', ['data'=> $data, 'month' => $month, 'type' => $type]);
+
+            $pdf->setPaper('a4', 'landscape');
+
+            Session::put('query_customer', $data);
             return $pdf->download('customer_list.pdf');
             // return view::make('customer.birthday_print')->with(['data'=> $data, 'month' => $month, 'type' => $type]);
         }
         else {
+            Session::put('query_customer', $data);
             return redirect()->back()->with(['data'=> $data, 'month' => $month, 'type' => $type])->withInput();
         }        
     }

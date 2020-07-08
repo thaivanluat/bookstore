@@ -52,4 +52,5 @@ return [
     'cancel' => 'Hủy bỏ',
     'delete_invoice' => 'Xóa hóa đơn',
     'add_invoice' => 'Thêm hóa đơn',
+    'created_by' => 'Người tạo',
 ];

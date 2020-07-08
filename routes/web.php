@@ -94,6 +94,7 @@ Route::group(['middleware' => 'check.user'], function () {
         Route::get('/report/{type}', 'ReportController@index');
         Route::post('create-debt-report', 'ReportController@createDebtReport');
         Route::post('create-inventory-report', 'ReportController@createInventoryReport');
+        Route::post('create-staff-report', 'ReportController@createStaffReport');
 
         Route::group(['middleware' => 'check.admin'], function () {
             Route::get('/user/index', 'UserController@index');

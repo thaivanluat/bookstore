@@ -11,8 +11,7 @@ class BookController extends Controller
     public function index() {
         $data = DB::table('DAUSACH')
                 ->join('THELOAI', 'DAUSACH.MaTheLoai', '=', 'THELOAI.MaTheLoai')
-                ->join('CHITIETTACGIA', 'DAUSACH.MaDauSach', '=', 'CHITIETTACGIA.MaDauSach')
-                ->join('TACGIA', 'CHITIETTACGIA.MaTacGia', '=', 'TACGIA.MaTacGia')
+                ->join('TACGIA', 'DAUSACH.MaTacGia', '=', 'TACGIA.MaTacGia')
                 ->select('DAUSACH.*', 'TACGIA.*', 'THELOAI.*')
                 ->orderBy('DAUSACH.MaDauSach', 'desc')->get();
         
@@ -26,8 +25,7 @@ class BookController extends Controller
         $data = DB::table('DAUSACH')
                 ->join('SACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
                 ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
-                ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
-                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'DAUSACH.MaTacGia')
                 ->select('SACH.*', 'TACGIA.TenTacGia', 'THELOAI.TenTheLoai')
                 ->where('DAUSACH.MaDauSach', $id)
                 ->orderBy('SACH.MaSach', 'desc')->get();
@@ -40,23 +38,20 @@ class BookController extends Controller
         $input = $request->all();
 
         try {
-            $queryResult1 = DB::table('DAUSACH')
+            $queryResult = DB::table('DAUSACH')
                             ->where('MaDauSach', $input['id'])
-                            ->update(['TenDauSach' => $input['name'], 'MaTheLoai' => $input['category']]);
-            
-            $queryResult2 = DB::table('CHITIETTACGIA')
-                            ->where('MaDauSach', $input['id'])
-                            ->update(['MaTacGia' => $input['author']]);
+                            ->update(['TenDauSach' => $input['name'], 
+                                        'MaTheLoai' => $input['category'],
+                                        'MaTacGia' => $input['author']]);
         }
         catch (\Exception $e) {
-            $queryResult1 = 0;
-            $queryResult2 = 0;
+            $queryResult = 0;
         }
 
         $response = [];
         $response['success'] = false;
 
-        if($queryResult1 == 1 && $queryResult2 == 1) {
+        if($queryResult == 1) {
             $response['success'] = true;
         }
 
@@ -90,30 +85,23 @@ class BookController extends Controller
         $insertId = $sequence->nextValue('S_MADAUSACH_ID');
 
         try {
-            $queryResult1 = DB::table('DAUSACH')->insert([
+            $queryResult = DB::table('DAUSACH')->insert([
                 [
                     'MaDauSach' => $insertId, 
                     'TenDauSach' => $input['name'],
-                    'MaTheLoai' => $input['category']
-                ]
-            ]);
-
-            $queryResult2 = DB::table('CHITIETTACGIA')->insert([
-                [
-                    'MaDauSach' => $insertId, 
+                    'MaTheLoai' => $input['category'],
                     'MaTacGia' => $input['author']
                 ]
             ]);
         }
         catch (\Exception $e) {
-            $queryResult1 = 0;
-            $queryResult2 = 0;
+            $queryResult = 0;
         }
 
         $response = [];
         $response['success'] = false;
 
-        if($queryResult1 == 1 && $queryResult2 == 1) {
+        if($queryResult == 1) {
             $response['success'] = true;
         }
 

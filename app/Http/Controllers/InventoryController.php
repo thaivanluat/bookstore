@@ -23,8 +23,7 @@ class InventoryController extends Controller
             ->join('SACH', 'SACH.MaSach', '=', 'CHITIETPHIEUKIEMKHO.MaSach')
             ->join('DAUSACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
             ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
-            ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
-            ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+            ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'DAUSACH.MaTacGia')
             ->select('CHITIETPHIEUKIEMKHO.*', 'SACH.NhaXuatBan', 'SACH.NamXuatBan', 'DAUSACH.TenDauSach', 'DAUSACH.MaDauSach','THELOAI.*', 'TACGIA.TenTacGia', 'TACGIA.MaTacGia')
             ->where('PHIEUKIEMKHO.MaPhieuKiem', $id)
             ->orderBy('CHITIETPHIEUKIEMKHO.MaSach', 'desc')->get();
@@ -64,8 +63,7 @@ class InventoryController extends Controller
         $data = DB::table('SACH')
                 ->join('DAUSACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
                 ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
-                ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
-                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'DAUSACH.MaTacGia')
                 ->select('SACH.*', 'THELOAI.TenTheLoai', 'TACGIA.TenTacGia')
                 ->where('SACH.MaDauSach', $input['id'])->orderBy('MaSach', 'desc')->get();
         return response()->json($data);

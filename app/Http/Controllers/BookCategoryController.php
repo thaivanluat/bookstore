@@ -15,8 +15,7 @@ class BookCategoryController extends Controller
 
     public function detail($id) {
         $data = DB::table('DAUSACH')
-                ->join('CHITIETTACGIA', 'DAUSACH.MaDauSach', '=', 'CHITIETTACGIA.MaDauSach')
-                ->join('TACGIA', 'CHITIETTACGIA.MaTacGia', '=', 'TACGIA.MaTacGia')
+                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'DAUSACH.MaTacGia')
                 ->select('DAUSACH.*', 'TACGIA.*')
                 ->where('DAUSACH.MaTheLoai', $id)
                 ->orderBy('DAUSACH.MaDauSach', 'desc')->get();

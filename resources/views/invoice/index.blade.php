@@ -27,6 +27,7 @@
 							<th>{{trans('invoice.amount_received')}}</th>
                             <th>{{trans('invoice.debt')}}</th>
                             <th>{{trans('invoice.total')}}</th>
+							<th style="width: 10%;">{{trans('invoice.created_by')}}</th>
                             <th style="width: 20%;">{{trans('invoice.action')}}</th>
 						</tr>
 					</thead>
@@ -40,6 +41,7 @@
 							<th class="invoice-amount-received">{{ number_format($invoice->sotientra) }}</th>
 							<th class="invoice-debt">{{ number_format($invoice->tongtien - $invoice->sotientra) }}</th>
 							<th class="invoice-total">{{ number_format($invoice->tongtien) }}</th>
+							<th class="invoice-created-by">{{ $invoice->nguoitao }}</th>
 							<th style="text-align: center;">
 								<input type="hidden" class="invoice-id" value="{{ $invoice->mahoadon }}">
 								<a target="_blank" href="{{url('/invoice/detail', [$invoice->mahoadon])}}" class="btn btn-info detail-button"><i class="fas fa-info-circle"></i> {{trans('invoice.detail')}}</a>

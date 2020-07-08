@@ -16,9 +16,9 @@ class AuthorController extends Controller
     public function detail($id) {
         $data = DB::table('DAUSACH')
                 ->join('THELOAI', 'DAUSACH.MaTheLoai', '=', 'THELOAI.MaTheLoai')
-                ->join('CHITIETTACGIA', 'DAUSACH.MaDauSach', '=', 'CHITIETTACGIA.MaDauSach')
+                ->join('TACGIA', 'DAUSACH.MaTacGia', '=', 'TACGIA.MaTacGia')
                 ->select('DAUSACH.MaDauSach','DAUSACH.TenDauSach', 'THELOAI.*')
-                ->where('CHITIETTACGIA.MaTacGia', $id)
+                ->where('DAUSACH.MaTacGia', $id)
                 ->orderBy('DAUSACH.MaDauSach', 'desc')->get();
         
         $authorName = DB::table('TACGIA')->where('MaTacGia', $id)->value('TenTacGia');

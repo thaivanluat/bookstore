@@ -20,8 +20,7 @@ class InputReceiptController extends Controller
             ->join('SACH', 'SACH.MaSach', '=', 'CHITIETPHIEUNHAPSACH.MaSach')
             ->join('DAUSACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
             ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
-            ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
-            ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+            ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'DAUSACH.MaTacGia')
             ->select('CHITIETPHIEUNHAPSACH.*', 'SACH.NhaXuatBan', 'SACH.NamXuatBan', 'DAUSACH.TenDauSach', 'DAUSACH.MaDauSach','THELOAI.*', 'TACGIA.TenTacGia', 'TACGIA.MaTacGia')
             ->where('PHIEUNHAPSACH.MaPhieuNhapSach', $id)
             ->orderBy('CHITIETPHIEUNHAPSACH.MaSach', 'desc')->get();
@@ -61,8 +60,7 @@ class InputReceiptController extends Controller
         $data = DB::table('SACH')
                 ->join('DAUSACH', 'DAUSACH.MaDauSach', '=', 'SACH.MaDauSach')
                 ->join('THELOAI', 'THELOAI.MaTheLoai', '=', 'DAUSACH.MaTheLoai')
-                ->join('CHITIETTACGIA', 'CHITIETTACGIA.MaDauSach', '=', 'DAUSACH.MaDauSach')
-                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'CHITIETTACGIA.MaTacGia')
+                ->join('TACGIA', 'TACGIA.MaTacGia', '=', 'DAUSACH.MaTacGia')
                 ->select('SACH.*', 'THELOAI.TenTheLoai', 'TACGIA.TenTacGia')
                 ->where('SACH.MaDauSach', $input['id'])->orderBy('MaSach', 'desc')->get();
         return response()->json($data);
@@ -77,13 +75,9 @@ class InputReceiptController extends Controller
         $data = $input['data'];
         try {
             $queryResult = DB::transaction(function() use ($insertId, $data) {
-
                 DB::insert('insert into PHIEUNHAPSACH (MaPhieuNhapSach, NgayLap,TongTien) values (?,sysdate , ?)', [$insertId, 0]);
 
                 foreach ($data as $dt) {
-                    // DB::insert('insert into BAOCAOTON (MaSach, NgayNhap, TonDau, TonCuoi, PhatSinh) 
-                    // values (?,sysdate , ?, ?, ?)', [ $dt['id'], 0, 0, $dt['quantity']]);
-
                     DB::statement('call update_baocaoton(?, ?)',[$dt['id'], $dt['quantity']]);
 
                     DB::table('CHITIETPHIEUNHAPSACH')->insert([
@@ -91,14 +85,11 @@ class InputReceiptController extends Controller
                             'MaPhieuNhapSach' => $insertId,
                             'MaSach' => $dt['id'],
                             'SoLuong' =>  $dt['quantity'],
-                            'DonGiaNhap' =>  0,
-                            'ThanhTien' => 0
+                            'DonGiaNhap' =>  0
                         ]
                     ]);
                 }
-    
-                // DB::statement('call proc_update_price_CHITIETPHIEUNHAPSACH(?)',[$insertId]);
-                // DB::statement('call proc_update_total_PhieuNhap(?)',[$insertId]);
+
                 DB::statement('call proc_after_create_phieunhap(?)',[$insertId]);
             });
 

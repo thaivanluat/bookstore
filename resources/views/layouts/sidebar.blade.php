@@ -73,7 +73,7 @@
       <span>{{ trans('app.receipt') }}</span></a>
   </li>
 
-  @if(Session::get('user')->chucvu != 'staff')
+  @if(in_array(2,Session::get('role')))
   <li class="nav-item @if (Request::is('report/*')) active @endif">
     <a class="nav-link @if (!Request::is('report/*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
       <i class="fas fa-chart-pie"></i>
@@ -83,6 +83,8 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item @if (Request::is('report/inventory')) active @endif" href="{{ url('/report/inventory') }}">{{ trans('app.inventory_report') }}</a>
         <a class="collapse-item @if (Request::is('report/debt')) active @endif" href="{{ url('/report/debt') }}">{{ trans('app.debt_report') }}</a>
+        <!-- <a class="collapse-item @if (Request::is('report/customer')) active @endif" href="{{ url('/report/customer') }}">{!! trans('app.customer_report') !!}</a>
+        <a class="collapse-item @if (Request::is('report/staff')) active @endif" href="{{ url('/report/staff') }}">{!! trans('app.staff_report') !!}</a> -->
       </div>
     </div>
   </li>
